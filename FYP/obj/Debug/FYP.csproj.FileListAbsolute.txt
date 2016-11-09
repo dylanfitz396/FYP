@@ -76,3 +76,4 @@ C:\Git\FYP\FYP\FYP\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Git\FYP\FYP\FYP\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Git\FYP\FYP\FYP\obj\Debug\FYP.dll
 C:\Git\FYP\FYP\FYP\obj\Debug\FYP.pdb
+C:\Git\FYP\FYP\FYP\obj\Debug\FYP.csprojResolveAssemblyReference.cache

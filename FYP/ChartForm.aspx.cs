@@ -40,6 +40,7 @@ namespace FYP
             {
                 dt = GetData(SelectedEmployee);
 
+                //data
                 str.Append(@"<script =*text/javascript*> google.load( *visualization*, *1*, {packages:[*corechart*]});
                        google.setOnLoadCallback(drawChart);
                        function drawChart() {
@@ -55,12 +56,15 @@ namespace FYP
                     str.Append("data.setValue(" + i + "," + 1 + "," + dt.Rows[i]["ExpertiseLevel"] + ") ;");
                 }
 
+                //options
                 str.Append(" var chart = new google.visualization.BarChart(document.getElementById('chart_div'));");
-                str.Append(" chart.draw(data, {width: 900, height: 400, title: 'Your Skill Chart: " + SelectedEmployee +
-                           "',");
-                str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'green'}},");
+                //str.Append(" google.visualization.events.addListener(chart, 'ready', changeBorderRadius)); google.visualization.events.addListener(chart, 'select', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseover', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseout', changeBorderRadius); function changeBorderRadius() { chartColumns = document.getElementById('chart_div').getElementsByTagName('rect'); Array.prototype.forEach.call(chartColumns, function(column) { if ((colors.indexOf(column.getAttribute('fill')) > -1) || (column.getAttribute('fill') === 'none') || (column.getAttribute('stroke') === '#ffffff')) { column.setAttribute('rx', 20); column.setAttribute('ry', 20); } }");
+                str.Append(" chart.draw(data, {width: 900, height: 400, title: 'Your Skill Chart: " + SelectedEmployee + "',");
+                str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
                 str.Append("colors: ['#73a839'],");
-                str.Append("animation: {duration: 1500, startup: true},");
+                str.Append("dataOpacity: 0.8,");
+                str.Append("legend: { position: 'none' },");
+                str.Append("animation: {duration: 1500, startup: true, easing: 'out'},");
                 str.Append("vAxis: { title: 'Skill' },");
                 str.Append("}); }");
                 str.Append("</script>");

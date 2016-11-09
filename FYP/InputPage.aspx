@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="InputPage.aspx.cs" Inherits="FYP.InputPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="jumbotron">
     <h1>Update Details</h1>
 
     <hr />
@@ -54,6 +55,7 @@
             </div>
         </div>
          </div>
+        </div>
         </div>
         </div>
 </asp:Content>
