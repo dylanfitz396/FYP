@@ -8,11 +8,14 @@
     <div class="row">
     <div class="col-md-8">
         <div class="form-horizontal">
-            
+       <div class="row">
+           
+        <div class="col-md-8"> 
     <div class="form-group">
         <asp:Label ID="Label1" runat="server" CssClass="col-md-3 control-label">Employee Name:</asp:Label>
         <asp:Label ID="Label4" runat="server" CssClass="col-md-3 control-label">Dylan Fitzgerald</asp:Label>
     </div>
+
 
     <div class="form-group">
         <asp:Label ID="Label2" runat="server" CssClass="col-md-3 control-label">Skill:</asp:Label>
@@ -23,9 +26,12 @@
         <asp:Label ID="Label3" runat="server" CssClass="col-md-3 control-label">Expertise Level:</asp:Label>
         <asp:TextBox ID="txtExpertiseLevel" runat="server" CssClass="form-control"></asp:TextBox>
     </div>
+            </div>
             
+           <div class="col-md-4"> 
             <asp:PlaceHolder ID = "PlaceHolder1" runat="server" />
-       
+       </div>
+           </div>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Database1ConnectionString1 %>" DeleteCommand="DELETE FROM [Skills] WHERE [Id] = @Id" InsertCommand="INSERT INTO [Skills] ([Id], [EmpName], [Skill], [ExpertiseLevel]) VALUES (@Id, @EmpName, @Skill, @ExpertiseLevel)" ProviderName="<%$ ConnectionStrings:Database1ConnectionString1.ProviderName %>" SelectCommand="SELECT [Id], [EmpName], [Skill], [ExpertiseLevel] FROM [Skills]" UpdateCommand="UPDATE [Skills] SET [EmpName] = @EmpName, [Skill] = @Skill, [ExpertiseLevel] = @ExpertiseLevel WHERE [Id] = @Id">
             <DeleteParameters>
@@ -56,7 +62,7 @@
         </p>
             </div>
         </div>
-         </div>
+            </div>
         </div>
         </div>
         </div>

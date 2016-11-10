@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
 
 namespace FYP
 {
@@ -17,7 +12,6 @@ namespace FYP
         //Get connection string from web.config
         public static SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[
             "Database1ConnectionString1"].ConnectionString);
-
 
 
         public static DataTable GetData(string SelectedEmployee)
@@ -55,7 +49,8 @@ namespace FYP
                 //options
                 str.Append(" var chart = new google.visualization.BarChart(document.getElementById('chart_div'));");
                 //str.Append(" google.visualization.events.addListener(chart, 'ready', changeBorderRadius)); google.visualization.events.addListener(chart, 'select', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseover', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseout', changeBorderRadius); function changeBorderRadius() { chartColumns = document.getElementById('chart_div').getElementsByTagName('rect'); Array.prototype.forEach.call(chartColumns, function(column) { if ((colors.indexOf(column.getAttribute('fill')) > -1) || (column.getAttribute('fill') === 'none') || (column.getAttribute('stroke') === '#ffffff')) { column.setAttribute('rx', 20); column.setAttribute('ry', 20); } }");
-                str.Append(" chart.draw(data, {width: 900, height: 400, title: 'Your Skill Chart: " + SelectedEmployee + "',");
+                str.Append(" chart.draw(data, {width: 900, height: 400, title: 'Your Skill Chart: " + SelectedEmployee +
+                           "',");
                 str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
                 str.Append("colors: ['#73a839'],");
                 str.Append("dataOpacity: 0.8,");

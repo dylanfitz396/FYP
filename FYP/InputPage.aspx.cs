@@ -15,14 +15,14 @@ namespace FYP
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack)
+            if (!IsPostBack)
             {
-                string selectedEmployee = "Dylan";
+                var selectedEmployee = "Dylan";
                 //Populating a DataTable from database.
-                DataTable dt = GlobalClass.GetData(selectedEmployee);
+                var dt = GlobalClass.GetData(selectedEmployee);
 
                 //Building an HTML string.
-                StringBuilder html = new StringBuilder();
+                var html = new StringBuilder();
 
                 //Table start.
                 html.Append("<table border = '1'>");
@@ -62,7 +62,6 @@ namespace FYP
         {
             if (txtSkill.Text != "")
             {
-
                 var dt = new DataTable();
                 dt = GetData();
                 {
