@@ -11,7 +11,8 @@
         <div class="form-group">
         <div class="col-md-9">
             <asp:Button class="btn btn-info btn-sm" ID="btnDylan" runat="server" Text="Dylan" OnClick="btnDylan_Click" />
-
+            <asp:Button class="btn btn-info btn-sm" ID="btnSarah" runat="server" Text="Sarah" OnClick="btnSarah_Click" />
+            <asp:Button class="btn btn-info btn-sm" ID="btnMegan" runat="server" Text="Megan" OnClick="btnMegan_Click" />
             <asp:Button class="btn btn-info btn-sm" ID="btnChris" runat="server" Text="Chris" OnClick="btnChris_Click" />
             </div>
             
