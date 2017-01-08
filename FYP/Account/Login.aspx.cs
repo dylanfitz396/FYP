@@ -36,7 +36,7 @@ namespace FYP.Account
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                        IdentityHelper.RedirectToReturnUrl("/HomePage.aspx", Response);
                         break;
                     case SignInStatus.LockedOut:
                         Response.Redirect("/Account/Lockout");

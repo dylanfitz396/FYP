@@ -5,27 +5,32 @@ namespace FYP
 {
     public partial class TeamView : Page
     {
-        private string SelectedEmployee;
+        private string EmpFirstName;
+        private string EmpLastName;
         private string result;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Page.IsPostBack == false)
             {
-                SelectedEmployee = "Dylan";
-                result = GlobalClass.BindChart(SelectedEmployee);
+                EmpFirstName = "Dylan";
+                EmpLastName = "Fitzgerald";
+                result = GlobalClass.BindChart(EmpFirstName, EmpLastName);
                 lt.Text = result.Replace('*', '"');
 
-                SelectedEmployee = "Sarah";
-                result = GlobalClass.BindChart(SelectedEmployee);
+                EmpFirstName = "Sarah";
+                EmpLastName = "Test";
+                result = GlobalClass.BindChart(EmpFirstName, EmpLastName);
                 lt1.Text = result.Replace('*', '"');
 
-                SelectedEmployee = "Chris";
-                result = GlobalClass.BindChart(SelectedEmployee);
+                EmpFirstName = "Chris";
+                EmpLastName = "Test";
+                result = GlobalClass.BindChart(EmpFirstName, EmpLastName);
                 lt2.Text = result.Replace('*', '"');
 
-                SelectedEmployee = "Megan";
-                result = GlobalClass.BindChart(SelectedEmployee);
+                EmpFirstName = "Megan";
+                EmpLastName = "Test";
+                result = GlobalClass.BindChart(EmpFirstName, EmpLastName);
                 lt3.Text = result.Replace('*', '"');
             }
         }

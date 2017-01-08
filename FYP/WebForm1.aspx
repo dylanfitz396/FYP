@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
     <div>
         <asp:Literal ID="lt" runat="server"></asp:Literal>
         <div id="chart_div"></div>    

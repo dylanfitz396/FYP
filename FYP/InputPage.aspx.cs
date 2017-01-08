@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FYP.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -13,13 +16,21 @@ namespace FYP
         public static SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[
             "Database1ConnectionString1"].ConnectionString);
 
+        private string EmpFirstName;
+        private string EmpLastName;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                var selectedEmployee = "Dylan";
+                var currentUserId = User.Identity.GetUserId();
+                var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var currentUser = manager.FindById(User.Identity.GetUserId());
+                EmpFirstName = currentUser.FirstName;
+                EmpLastName = currentUser.LastName;
+                
                 //Populating a DataTable from database.
-                var dt = GlobalClass.GetData(selectedEmployee);
+                var dt = GlobalClass.GetData(EmpFirstName, EmpLastName);
 
                 //Building an HTML string.
                 var html = new StringBuilder();
@@ -60,6 +71,12 @@ namespace FYP
 
         protected void btnGenerate_Click(object sender, EventArgs e)
         {
+            var currentUserId = User.Identity.GetUserId();
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+            EmpFirstName = currentUser.FirstName;
+            EmpLastName = currentUser.LastName;
+
             if (txtSkill.Text != "")
             {
                 var dt = new DataTable();
@@ -67,13 +84,14 @@ namespace FYP
                 {
                     var xp =
                         new SqlCommand(
-                            "Insert into Skills(Id, EmpName, Skill, ExpertiseLevel) Values(@Id, @EmpName, @Skill, @ExpertiseLevel)",
+                            "Insert into Skills(Id, EmpName, Skill, ExpertiseLevel, EmpLastName) Values(@Id, @EmpName, @Skill, @ExpertiseLevel, @EmpLastName)",
                             conn);
                     var newId = (dt.Rows.Count + 1).ToString();
                     xp.Parameters.AddWithValue("@Id", newId);
-                    xp.Parameters.AddWithValue("@EmpName", GlobalClass.SelectedEmployee);
+                    xp.Parameters.AddWithValue("@EmpName", EmpFirstName);
                     xp.Parameters.AddWithValue("@Skill", txtSkill.Text);
                     xp.Parameters.AddWithValue("@ExpertiseLevel", txtExpertiseLevel.Text);
+                    xp.Parameters.AddWithValue("@EmpLastName", EmpLastName);
 
                     conn.Open();
                     xp.ExecuteNonQuery();
@@ -81,7 +99,7 @@ namespace FYP
                 }
             }
 
-            Response.Redirect("~/ChartForm.aspx");
+            Response.Redirect("~/HomePage.aspx");
         }
 
         private static DataTable GetData()

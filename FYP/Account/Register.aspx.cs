@@ -14,7 +14,7 @@ namespace FYP.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-            var user = new ApplicationUser {UserName = Email.Text, Email = Email.Text};
+            var user = new ApplicationUser {UserName = Email.Text, Email = Email.Text , FirstName = FirstName.Text, LastName = LastName.Text};
             var result = manager.Create(user, Password.Text);
             if (result.Succeeded)
             {
@@ -24,7 +24,7 @@ namespace FYP.Account
                 //manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
 
                 signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
-                IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                IdentityHelper.RedirectToReturnUrl("/EnterDetailsPage.aspx", Response);
             }
             else
             {

@@ -3,7 +3,7 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
         <div class="jumbotron">
-            <h1>Welcome Dylan</h1>
+            <h1>Your Home Page</h1>
         <asp:Literal ID="lt" runat="server"></asp:Literal>
         <div id="chart_div"></div>
             </div>

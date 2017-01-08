@@ -1,34 +1,41 @@
-﻿using System.Configuration;
+﻿using FYP.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using System.Web.Providers.Entities;
+using Microsoft.AspNet.Identity;
+using System.Web.UI;
 
 namespace FYP
 {
-    public class GlobalClass
+    public partial class GlobalClass : Page
     {
-        public static string SelectedEmployee = "Dylan";
+        //public static string EmpFirstName = "Dylan";
+        //public static string EmpLastName = "Fitzgerald";
+
         public static StringBuilder str = new StringBuilder();
         //Get connection string from web.config
         public static SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[
             "Database1ConnectionString1"].ConnectionString);
 
 
-        public static DataTable GetData(string SelectedEmployee)
-        {
+        public static DataTable GetData(string EmpFirstName, string EmpLastName)
+        { 
             var dt = new DataTable();
-            var cmd = "select Skill,ExpertiseLevel from Skills where EmpName = '" + SelectedEmployee + "'";
+            var cmd = "select Skill,ExpertiseLevel from Skills where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "'";
             var adp = new SqlDataAdapter(cmd, conn);
             adp.Fill(dt);
             return dt;
         }
 
-        public static string BindChart(string SelectedEmployee)
+        public static string BindChart(string EmpFirstName, string EmpLastName)
         {
             var dt = new DataTable();
             try
             {
-                dt = GetData(SelectedEmployee);
+                dt = GetData(EmpFirstName, EmpLastName);
 
                 //data
                 str.Append(@"<script =*text/javascript*> google.load( *visualization*, *1*, {packages:[*corechart*]});
@@ -49,7 +56,7 @@ namespace FYP
                 //options
                 str.Append(" var chart = new google.visualization.BarChart(document.getElementById('chart_div'));");
                 //str.Append(" google.visualization.events.addListener(chart, 'ready', changeBorderRadius)); google.visualization.events.addListener(chart, 'select', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseover', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseout', changeBorderRadius); function changeBorderRadius() { chartColumns = document.getElementById('chart_div').getElementsByTagName('rect'); Array.prototype.forEach.call(chartColumns, function(column) { if ((colors.indexOf(column.getAttribute('fill')) > -1) || (column.getAttribute('fill') === 'none') || (column.getAttribute('stroke') === '#ffffff')) { column.setAttribute('rx', 20); column.setAttribute('ry', 20); } }");
-                str.Append(" chart.draw(data, {width: 900, height: 400, title: 'Your Skill Chart: " + SelectedEmployee +
+                str.Append(" chart.draw(data, {width: 900, height: 400, title: 'Skill Chart: " + EmpFirstName +
                            "',");
                 str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
                 str.Append("colors: ['#73a839'],");

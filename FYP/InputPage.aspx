@@ -13,7 +13,7 @@
         <div class="col-md-8"> 
     <div class="form-group">
         <asp:Label ID="Label1" runat="server" CssClass="col-md-3 control-label">Employee Name:</asp:Label>
-        <asp:Label ID="Label4" runat="server" CssClass="col-md-3 control-label">Dylan Fitzgerald</asp:Label>
+        <asp:Label ID="Label4" runat="server" CssClass="col-md-3 control-label"><%: Context.User.Identity.GetUserName() %></asp:Label>
     </div>
 
 

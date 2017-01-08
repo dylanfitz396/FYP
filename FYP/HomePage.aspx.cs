@@ -1,18 +1,25 @@
-﻿using System;
+﻿using FYP.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Web.UI;
 
 namespace FYP
 {
     public partial class HomePage : Page
-    {
-        private string SelectedEmployee = "Dylan";
-        private string result;
-
+    {       
         protected void Page_Load(object sender, EventArgs e)
         {
+            var currentUserId = User.Identity.GetUserId();
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+            string EmpFirstName = currentUser.FirstName;
+            string EmpLastName = currentUser.LastName;
+            string result;
+
             if (Page.IsPostBack == false)
             {
-                result = GlobalClass.BindChart(SelectedEmployee);
+                result = GlobalClass.BindChart(EmpFirstName, EmpLastName);
                 lt.Text = result.Replace('*', '"');
             }
         }

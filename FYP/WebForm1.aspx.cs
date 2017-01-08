@@ -9,7 +9,7 @@ namespace FYP
 {
     public partial class WebForm1 : Page
     {
-        private string SelectedEmployee = "Dylan";
+        private string EmpFirstName = "Dylan";
         StringBuilder str = new StringBuilder();
         //Get connection string from web.config
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[
@@ -19,26 +19,26 @@ namespace FYP
         {
             if (Page.IsPostBack == false)
             {
-                BindChart(SelectedEmployee);
+                BindChart(EmpFirstName);
             }
         }
 
-        private DataTable GetData(string SelectedEmployee)
+        private DataTable GetData(string EmpFirstName)
         {
             var dt = new DataTable();
             //var cmd = "select Skill,ExpertiseLevel from Skills where EmpName = 'Chris'";
-            var cmd = "select Skill,ExpertiseLevel from Skills where EmpName = '" + SelectedEmployee + "'";
+            var cmd = "select Skill,ExpertiseLevel from Skills where EmpName = '" + EmpFirstName + "'";
             var adp = new SqlDataAdapter(cmd, conn);
             adp.Fill(dt);
             return dt;
         }
 
-        private void BindChart(string SelectedEmployee)
+        private void BindChart(string EmpFirstName)
         {
             var dt = new DataTable();
             try
             {
-                dt = GetData(SelectedEmployee);
+                dt = GetData(EmpFirstName);
 
                 str.Append(@"<script =*text/javascript*> google.load( *visualization*, *1*, {packages:[*corechart*]});
                        google.setOnLoadCallback(drawChart);
@@ -56,7 +56,7 @@ namespace FYP
                 }
 
                 str.Append(" var chart = new google.visualization.BarChart(document.getElementById('chart_div'));");
-                str.Append(" chart.draw(data, {width: 900, height: 400, title: 'Your Skill Chart: " + SelectedEmployee +
+                str.Append(" chart.draw(data, {width: 900, height: 400, title: 'Skill Chart: " + EmpFirstName +
                            "',");
                 str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'green'}},");
                 str.Append("colors: ['#006C01'],");
@@ -73,14 +73,14 @@ namespace FYP
 
         protected void btnDylan_Click(object sender, EventArgs e)
         {
-            SelectedEmployee = "Dylan";
-            BindChart(SelectedEmployee);
+            EmpFirstName = "Dylan";
+            BindChart(EmpFirstName);
         }
 
         protected void btnChris_Click(object sender, EventArgs e)
         {
-            SelectedEmployee = "Chris";
-            BindChart(SelectedEmployee);
+            EmpFirstName = "Chris";
+            BindChart(EmpFirstName);
         }
     }
 }
