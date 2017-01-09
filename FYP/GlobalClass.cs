@@ -12,8 +12,6 @@ namespace FYP
 {
     public partial class GlobalClass : Page
     {
-        //public static string EmpFirstName = "Dylan";
-        //public static string EmpLastName = "Fitzgerald";
 
         public static StringBuilder str = new StringBuilder();
         //Get connection string from web.config
@@ -24,7 +22,7 @@ namespace FYP
         public static DataTable GetData(string EmpFirstName, string EmpLastName)
         { 
             var dt = new DataTable();
-            var cmd = "select Skill,ExpertiseLevel from Skills where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "'";
+            var cmd = "select Skill,ExpertiseLevel, ExpertiseLevelString from Skills where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "'";
             var adp = new SqlDataAdapter(cmd, conn);
             adp.Fill(dt);
             return dt;
@@ -43,14 +41,17 @@ namespace FYP
                        function drawChart() {
                         var data = new google.visualization.DataTable();
                         data.addColumn('string', 'Skill');
-                        data.addColumn('number', 'ExpertiseLevel');     
- 
+                        data.addColumn('number', 'ExpertiseLevel');
+                        data.addColumn({type:'string', role:'annotation'});  
+                           
                         data.addRows(" + dt.Rows.Count + ");");
 
                 for (var i = 0; i <= dt.Rows.Count - 1; i++)
                 {
                     str.Append("data.setValue( " + i + "," + 0 + "," + "'" + dt.Rows[i]["Skill"] + "');");
                     str.Append("data.setValue(" + i + "," + 1 + "," + dt.Rows[i]["ExpertiseLevel"] + ") ;");
+                    //data.addColumn({type:'string', role:'annotation'});
+                    str.Append("data.setValue( " + i + "," + 2 + "," + "'" + dt.Rows[i]["ExpertiseLevelString"] + "');");
                 }
 
                 //options
@@ -61,7 +62,7 @@ namespace FYP
                 str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
                 str.Append("colors: ['#73a839'],");
                 str.Append("dataOpacity: 0.8,");
-                str.Append("legend: { position: 'none' },");
+                str.Append("legend: { position: 'right' },");
                 str.Append("animation: {duration: 1500, startup: true, easing: 'out'},");
                 str.Append("vAxis: { title: 'Skill' },");
                 str.Append("}); }");

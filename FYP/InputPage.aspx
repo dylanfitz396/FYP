@@ -24,7 +24,7 @@
     
     <div class="form-group">
         <asp:Label ID="Label3" runat="server" CssClass="col-md-3 control-label">Expertise Level:</asp:Label>
-        <asp:TextBox ID="txtExpertiseLevel" runat="server" CssClass="form-control"></asp:TextBox>
+        <asp:DropDownList ID="lstExpertiseLevel" runat="server" CssClass="form-control"></asp:DropDownList>
     </div>
             </div>
             

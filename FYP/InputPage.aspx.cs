@@ -18,6 +18,7 @@ namespace FYP
 
         private string EmpFirstName;
         private string EmpLastName;
+        private int intExpertiseLevel;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,7 +29,14 @@ namespace FYP
                 var currentUser = manager.FindById(User.Identity.GetUserId());
                 EmpFirstName = currentUser.FirstName;
                 EmpLastName = currentUser.LastName;
-                
+
+                //Populate the DropDownList
+                lstExpertiseLevel.Items.Add("Beginner");
+                lstExpertiseLevel.Items.Add("Intermediate");
+                lstExpertiseLevel.Items.Add("Proficient");
+                lstExpertiseLevel.Items.Add("Advanced");
+                lstExpertiseLevel.Items.Add("SME");
+
                 //Populating a DataTable from database.
                 var dt = GlobalClass.GetData(EmpFirstName, EmpLastName);
 
@@ -79,19 +87,43 @@ namespace FYP
 
             if (txtSkill.Text != "")
             {
+
+                switch (lstExpertiseLevel.SelectedIndex)
+                {
+                    case 0:
+                        intExpertiseLevel = 1;
+                        break;
+                    case 1:
+                        intExpertiseLevel = 2;
+                        break;
+                    case 2:
+                        intExpertiseLevel = 3;
+                        break;
+                    case 3:
+                        intExpertiseLevel = 4;
+                        break;
+                    case 4:
+                        intExpertiseLevel = 5;
+                        break;
+                    default:
+                        intExpertiseLevel = 1;
+                        break;
+                }
+
                 var dt = new DataTable();
                 dt = GetData();
                 {
                     var xp =
                         new SqlCommand(
-                            "Insert into Skills(Id, EmpName, Skill, ExpertiseLevel, EmpLastName) Values(@Id, @EmpName, @Skill, @ExpertiseLevel, @EmpLastName)",
+                            "Insert into Skills(Id, EmpName, Skill, ExpertiseLevel, EmpLastName, ExpertiseLevelString) Values(@Id, @EmpName, @Skill, @ExpertiseLevel, @EmpLastName, @ExpertiseLevelString)",
                             conn);
                     var newId = (dt.Rows.Count + 1).ToString();
                     xp.Parameters.AddWithValue("@Id", newId);
                     xp.Parameters.AddWithValue("@EmpName", EmpFirstName);
                     xp.Parameters.AddWithValue("@Skill", txtSkill.Text);
-                    xp.Parameters.AddWithValue("@ExpertiseLevel", txtExpertiseLevel.Text);
+                    xp.Parameters.AddWithValue("@ExpertiseLevel", intExpertiseLevel.ToString());
                     xp.Parameters.AddWithValue("@EmpLastName", EmpLastName);
+                    xp.Parameters.AddWithValue("@ExpertiseLevelString", lstExpertiseLevel.SelectedValue);
 
                     conn.Open();
                     xp.ExecuteNonQuery();
