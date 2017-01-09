@@ -31,12 +31,37 @@
             </div>
 
             <div class="form-group">
+            <asp:Label ID="Skill4" runat="server" CssClass="col-md-2 control-label" Visible="false">Skill 4:</asp:Label>
+            <asp:TextBox ID="txtSkill4" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
+            <asp:Label ID="Skill5" runat="server" CssClass="col-md-2 control-label" Visible="false">Skill 5:</asp:Label>
+            <asp:TextBox ID="txtSkill5" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
+            <asp:Label ID="Skill6" runat="server" CssClass="col-md-2 control-label" Visible="false">Skill 6:</asp:Label>
+            <asp:TextBox ID="txtSkill6" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
+            <asp:Label ID="Skill7" runat="server" CssClass="col-md-2 control-label" Visible="false">Skill 7:</asp:Label>
+            <asp:TextBox ID="txtSkill7" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
+            <asp:Label ID="Skill8" runat="server" CssClass="col-md-2 control-label" Visible="false">Skill 8:</asp:Label>
+            <asp:TextBox ID="txtSkill8" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
             <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
             </div>
 
             <div class="form-group">
             <div class="col-md-offset-1 col-md-2">
-                <asp:Button ID="Button1" runat="server" Text="Add Skill" onclick="addnewtext_Click" CssClass="btn btn-info" />
+                <asp:Button ID="btnAddSkill" runat="server" Text="Add Skill" onclick="AddSkill_Click" CssClass="btn btn-info" />
             </div>
             </div>
 
@@ -58,14 +83,39 @@
             <asp:TextBox ID="txtExpertiseLevel3" runat="server" CssClass="form-control" Width="280px"></asp:TextBox>
             </div>
 
-            <div class="form-
+            <div class="form-group">
+            <asp:Label ID="ExpertiseLevel4" runat="server" CssClass="col-md-3 control-label" Visible="false">Expertise Level 4:</asp:Label>
+            <asp:TextBox ID="txtExpertiseLevel4" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
+            <asp:Label ID="ExpertiseLevel5" runat="server" CssClass="col-md-3 control-label" Visible="false">Expertise Level 5:</asp:Label>
+            <asp:TextBox ID="txtExpertiseLevel5" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
+            <asp:Label ID="ExpertiseLevel6" runat="server" CssClass="col-md-3 control-label" Visible="false">Expertise Level 6:</asp:Label>
+            <asp:TextBox ID="txtExpertiseLevel6" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
+            <asp:Label ID="ExpertiseLevel7" runat="server" CssClass="col-md-3 control-label" Visible="false">Expertise Level 7:</asp:Label>
+            <asp:TextBox ID="txtExpertiseLevel7" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
+            <asp:Label ID="ExpertiseLevel8" runat="server" CssClass="col-md-3 control-label" Visible="false">Expertise Level 8:</asp:Label>
+            <asp:TextBox ID="txtExpertiseLevel8" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
             <asp:PlaceHolder ID="PlaceHolder2" runat="server"></asp:PlaceHolder>
             </div>
 
             <div class="form-group">
             <div class="col-md-offset-8 col-md-3">
                 <asp:Button runat="server" OnClick="CreateUser_Click" Text="Create Account" CssClass="btn btn-success btn-lg" />
-            </div
+            </div>
             </div>
 
         </div>

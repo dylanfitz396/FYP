@@ -14,6 +14,7 @@ namespace FYP
 
         public static SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[
             "Database1ConnectionString1"].ConnectionString);
+        static int newRowIndex = 3;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -21,41 +22,34 @@ namespace FYP
 
         }
 
-        TextBox tb;
-        TextBox tb1;
-        Label lb;
-        Label lb1;
-        static int i = 0;
 
-        protected void addnewtext_Click(object sender, EventArgs e)
+        protected void AddSkill_Click(object sender, EventArgs e)
         {
-            i++;
-            int j;
-            for (j = 0; j < i; j++)
+            newRowIndex++;
+
+            var container = Master.FindControl("MainContent");
+
+            string controlNamelblSkill = "Skill" + newRowIndex.ToString();
+            var controllblSkill = container.FindControl(controlNamelblSkill);
+            controllblSkill.Visible = true;
+
+            string controlNametxtSkill = "txtSkill" + newRowIndex.ToString();
+            var controltxtSkill = container.FindControl(controlNametxtSkill);
+            controltxtSkill.Visible = true;
+
+            string controlNamelblExpertiseLevel = "ExpertiseLevel" + newRowIndex.ToString();
+            var controllblExpertiseLevel = container.FindControl(controlNamelblExpertiseLevel);
+            controllblExpertiseLevel.Visible = true;
+
+            string controlNametxtExpertiseLevel = "txtExpertiseLevel" + newRowIndex.ToString();
+            var controltxtExpertiseLevel = container.FindControl(controlNametxtExpertiseLevel);
+            controltxtExpertiseLevel.Visible = true;
+            
+            
+            if (newRowIndex > 7)
             {
-                int rowNum = j + 4;
-
-                lb = new Label();
-                lb.ID = "Skill" + rowNum.ToString();
-                lb.Text = "Skill " + rowNum.ToString() + ":";
-                lb.CssClass = "col-md-2 control-label";
-                tb = new TextBox();
-                tb.ID = "txtSkill" + rowNum.ToString();
-                tb.CssClass = "form-control";
-
-                lb1 = new Label();
-                lb1.ID = "ExpertiseLevel" + rowNum.ToString();
-                lb1.Text = "Expertise Level " + rowNum.ToString() + ":";
-                lb1.CssClass = "col-md-3 control-label";
-                tb1 = new TextBox();
-                tb1.ID = "txtExpertiseLevel" + rowNum.ToString();
-                tb1.CssClass = "form-control";
-
-                PlaceHolder1.Controls.Add(lb);
-                PlaceHolder1.Controls.Add(tb);
-                
-                PlaceHolder2.Controls.Add(lb1);
-                PlaceHolder2.Controls.Add(tb1);
+                btnAddSkill.Enabled = false;
+                ErrorMessage.Text = "Maximum number of skills added. A user cannot enter more than 8 Skills so please prioritise based on level of expertise";
             }
 
         }
@@ -67,17 +61,16 @@ namespace FYP
             var currentUser = manager.FindById(User.Identity.GetUserId());
             string EmpFirstName = currentUser.FirstName;
             string EmpLastName = currentUser.LastName;
+            int rowNum = 1;
 
-            i++;
-
-            for (i = 1; i < 11; i++)
+            for (rowNum = 1; rowNum < 9; rowNum++)
             {
-                string controlNameSkill = "txtSkill" + i.ToString();
+                string controlNameSkill = "txtSkill" + rowNum.ToString();
                 var containerSkill = Master.FindControl("MainContent");
                 var controlSkill = containerSkill.FindControl(controlNameSkill);
                 TextBox txtSkill = (TextBox)controlSkill;
 
-                string controlNameExpertiseLevel = "txtExpertiseLevel" + i.ToString();
+                string controlNameExpertiseLevel = "txtExpertiseLevel" + rowNum.ToString();
                 var containerExpertiseLevel = Master.FindControl("MainContent");
                 var controlExpertiseLevel = containerExpertiseLevel.FindControl(controlNameExpertiseLevel);
                 TextBox txtExpertiseLevel = (TextBox)controlExpertiseLevel;
@@ -110,7 +103,7 @@ namespace FYP
                 }
             }
 
-        IdentityHelper.RedirectToReturnUrl("/HomePage.aspx", Response);
+            IdentityHelper.RedirectToReturnUrl("/HomePage.aspx", Response);
 
         }
 
