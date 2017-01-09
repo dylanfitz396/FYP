@@ -58,7 +58,7 @@
             <asp:TextBox ID="txtExpertiseLevel3" runat="server" CssClass="form-control" Width="280px"></asp:TextBox>
             </div>
 
-            <div class="form-group">
+            <div class="form-
             <asp:PlaceHolder ID="PlaceHolder2" runat="server"></asp:PlaceHolder>
             </div>
 
