@@ -24,11 +24,20 @@ namespace FYP
         {
             if (!IsPostBack)
             {
-                var currentUserId = User.Identity.GetUserId();
-                var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                var currentUser = manager.FindById(User.Identity.GetUserId());
-                EmpFirstName = currentUser.FirstName;
-                EmpLastName = currentUser.LastName;
+                //using try catch for dev purposes to make sure employee is selected for tests
+                try
+                {
+                    var currentUserId = User.Identity.GetUserId();
+                    var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var currentUser = manager.FindById(User.Identity.GetUserId());
+                    EmpFirstName = currentUser.FirstName;
+                    EmpLastName = currentUser.LastName;
+                }
+                catch
+                {
+                    EmpFirstName = "Dylan";
+                    EmpLastName = "Fitzgerald";
+                }
 
                 //Populate the DropDownList
                 lstExpertiseLevel.Items.Add("Beginner");
@@ -38,7 +47,7 @@ namespace FYP
                 lstExpertiseLevel.Items.Add("SME");
 
                 //Populating a DataTable from database.
-                var dt = GlobalClass.GetData(EmpFirstName, EmpLastName);
+                var dt = GlobalClass.GetEmployeeData(EmpFirstName, EmpLastName);
 
                 //Building an HTML string.
                 var html = new StringBuilder();
@@ -111,7 +120,7 @@ namespace FYP
                 }
 
                 var dt = new DataTable();
-                dt = GetData();
+                dt = GetSkillsData();
                 {
                     var xp =
                         new SqlCommand(
@@ -134,7 +143,7 @@ namespace FYP
             Response.Redirect("~/HomePage.aspx");
         }
 
-        private static DataTable GetData()
+        private static DataTable GetSkillsData()
         {
             var dt = new DataTable();
             var cmd = "select Skill,ExpertiseLevel from Skills";

@@ -19,7 +19,7 @@ namespace FYP
             "Database1ConnectionString1"].ConnectionString);
 
 
-        public static DataTable GetData(string EmpFirstName, string EmpLastName)
+        public static DataTable GetEmployeeData(string EmpFirstName, string EmpLastName)
         { 
             var dt = new DataTable();
             var cmd = "select Skill,ExpertiseLevel, ExpertiseLevelString from Skills where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "'";
@@ -33,7 +33,7 @@ namespace FYP
             var dt = new DataTable();
             try
             {
-                dt = GetData(EmpFirstName, EmpLastName);
+                dt = GetEmployeeData(EmpFirstName, EmpLastName);
 
                 //data
                 str.Append(@"<script =*text/javascript*> google.load( *visualization*, *1*, {packages:[*corechart*]});

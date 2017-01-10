@@ -193,13 +193,13 @@ namespace FYP {
         protected global::System.Web.UI.WebControls.Label ExpertiseLevel1;
         
         /// <summary>
-        /// txtExpertiseLevel1 control.
+        /// lstExpertiseLevel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExpertiseLevel1;
+        protected global::System.Web.UI.WebControls.DropDownList lstExpertiseLevel1;
         
         /// <summary>
         /// ExpertiseLevel2 control.
@@ -211,13 +211,13 @@ namespace FYP {
         protected global::System.Web.UI.WebControls.Label ExpertiseLevel2;
         
         /// <summary>
-        /// txtExpertiseLevel2 control.
+        /// lstExpertiseLevel2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExpertiseLevel2;
+        protected global::System.Web.UI.WebControls.DropDownList lstExpertiseLevel2;
         
         /// <summary>
         /// ExpertiseLevel3 control.
@@ -229,13 +229,13 @@ namespace FYP {
         protected global::System.Web.UI.WebControls.Label ExpertiseLevel3;
         
         /// <summary>
-        /// txtExpertiseLevel3 control.
+        /// lstExpertiseLevel3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExpertiseLevel3;
+        protected global::System.Web.UI.WebControls.DropDownList lstExpertiseLevel3;
         
         /// <summary>
         /// ExpertiseLevel4 control.
@@ -247,13 +247,13 @@ namespace FYP {
         protected global::System.Web.UI.WebControls.Label ExpertiseLevel4;
         
         /// <summary>
-        /// txtExpertiseLevel4 control.
+        /// lstExpertiseLevel4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExpertiseLevel4;
+        protected global::System.Web.UI.WebControls.DropDownList lstExpertiseLevel4;
         
         /// <summary>
         /// ExpertiseLevel5 control.
@@ -265,13 +265,13 @@ namespace FYP {
         protected global::System.Web.UI.WebControls.Label ExpertiseLevel5;
         
         /// <summary>
-        /// txtExpertiseLevel5 control.
+        /// lstExpertiseLevel5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExpertiseLevel5;
+        protected global::System.Web.UI.WebControls.DropDownList lstExpertiseLevel5;
         
         /// <summary>
         /// ExpertiseLevel6 control.
@@ -283,13 +283,13 @@ namespace FYP {
         protected global::System.Web.UI.WebControls.Label ExpertiseLevel6;
         
         /// <summary>
-        /// txtExpertiseLevel6 control.
+        /// lstExpertiseLevel6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExpertiseLevel6;
+        protected global::System.Web.UI.WebControls.DropDownList lstExpertiseLevel6;
         
         /// <summary>
         /// ExpertiseLevel7 control.
@@ -301,13 +301,13 @@ namespace FYP {
         protected global::System.Web.UI.WebControls.Label ExpertiseLevel7;
         
         /// <summary>
-        /// txtExpertiseLevel7 control.
+        /// lstExpertiseLevel7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExpertiseLevel7;
+        protected global::System.Web.UI.WebControls.DropDownList lstExpertiseLevel7;
         
         /// <summary>
         /// ExpertiseLevel8 control.
@@ -319,13 +319,13 @@ namespace FYP {
         protected global::System.Web.UI.WebControls.Label ExpertiseLevel8;
         
         /// <summary>
-        /// txtExpertiseLevel8 control.
+        /// lstExpertiseLevel8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExpertiseLevel8;
+        protected global::System.Web.UI.WebControls.DropDownList lstExpertiseLevel8;
         
         /// <summary>
         /// PlaceHolder2 control.

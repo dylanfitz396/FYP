@@ -70,42 +70,42 @@
         <div class="col-md-7"> 
             <div class="form-group">
             <asp:Label ID="ExpertiseLevel1" runat="server" CssClass="col-md-3 control-label">Expertise Level 1:</asp:Label>
-            <asp:TextBox ID="txtExpertiseLevel1" runat="server" CssClass="form-control" Width="280px"></asp:TextBox>
+            <asp:DropDownList ID="lstExpertiseLevel1" runat="server" CssClass="form-control" Width="280px"></asp:DropDownList>
             </div>
 
             <div class="form-group">
             <asp:Label ID="ExpertiseLevel2" runat="server" CssClass="col-md-3 control-label">Expertise Level 2:</asp:Label>
-            <asp:TextBox ID="txtExpertiseLevel2" runat="server" CssClass="form-control" Width="280px"></asp:TextBox>
+            <asp:DropDownList ID="lstExpertiseLevel2" runat="server" CssClass="form-control" Width="280px"></asp:DropDownList>
             </div>
 
             <div class="form-group">
             <asp:Label ID="ExpertiseLevel3" runat="server" CssClass="col-md-3 control-label">Expertise Level 3:</asp:Label>
-            <asp:TextBox ID="txtExpertiseLevel3" runat="server" CssClass="form-control" Width="280px"></asp:TextBox>
+            <asp:DropDownList ID="lstExpertiseLevel3" runat="server" CssClass="form-control" Width="280px"></asp:DropDownList>
             </div>
 
             <div class="form-group">
             <asp:Label ID="ExpertiseLevel4" runat="server" CssClass="col-md-3 control-label" Visible="false">Expertise Level 4:</asp:Label>
-            <asp:TextBox ID="txtExpertiseLevel4" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            <asp:DropDownList ID="lstExpertiseLevel4" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:DropDownList>
             </div>
 
             <div class="form-group">
             <asp:Label ID="ExpertiseLevel5" runat="server" CssClass="col-md-3 control-label" Visible="false">Expertise Level 5:</asp:Label>
-            <asp:TextBox ID="txtExpertiseLevel5" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            <asp:DropDownList ID="lstExpertiseLevel5" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:DropDownList>
             </div>
 
             <div class="form-group">
             <asp:Label ID="ExpertiseLevel6" runat="server" CssClass="col-md-3 control-label" Visible="false">Expertise Level 6:</asp:Label>
-            <asp:TextBox ID="txtExpertiseLevel6" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            <asp:DropDownList ID="lstExpertiseLevel6" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:DropDownList>
             </div>
 
             <div class="form-group">
             <asp:Label ID="ExpertiseLevel7" runat="server" CssClass="col-md-3 control-label" Visible="false">Expertise Level 7:</asp:Label>
-            <asp:TextBox ID="txtExpertiseLevel7" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            <asp:DropDownList ID="lstExpertiseLevel7" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:DropDownList>
             </div>
 
             <div class="form-group">
             <asp:Label ID="ExpertiseLevel8" runat="server" CssClass="col-md-3 control-label" Visible="false">Expertise Level 8:</asp:Label>
-            <asp:TextBox ID="txtExpertiseLevel8" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:TextBox>
+            <asp:DropDownList ID="lstExpertiseLevel8" runat="server" CssClass="form-control" Width="280px" Visible="false"></asp:DropDownList>
             </div>
 
             <div class="form-group">
