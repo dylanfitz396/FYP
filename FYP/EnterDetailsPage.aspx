@@ -13,8 +13,14 @@
         <hr />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
 
-        
+        <div class="form-group">
+            <asp:Label ID="SelectTeam" runat="server" CssClass="col-md-1 control-label">Select Team:</asp:Label>
+            <asp:DropDownList ID="lstSelectTeam" runat="server" CssClass="form-control" Width="310px"></asp:DropDownList>
+        </div>
+
         <div class="col-md-5"> 
+            
+
             <div class="form-group">
             <asp:Label ID="Skill1" runat="server" CssClass="col-md-2 control-label">Skill 1:</asp:Label>
             <asp:TextBox ID="txtSkill1" runat="server" CssClass="form-control" Width="280px"></asp:TextBox>

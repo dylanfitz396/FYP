@@ -47,7 +47,7 @@ namespace FYP
                 lstExpertiseLevel.Items.Add("SME");
 
                 //Populating a DataTable from database.
-                var dt = GlobalClass.GetEmployeeData(EmpFirstName, EmpLastName);
+                var dt = GlobalClass.GetSelectedEmployeeData(EmpFirstName, EmpLastName);
 
                 //Building an HTML string.
                 var html = new StringBuilder();
@@ -93,6 +93,7 @@ namespace FYP
             var currentUser = manager.FindById(User.Identity.GetUserId());
             EmpFirstName = currentUser.FirstName;
             EmpLastName = currentUser.LastName;
+            string SelectedTeam = GlobalClass.GetSelectedEmployeesTeam(EmpFirstName, EmpLastName);
 
             if (txtSkill.Text != "")
             {
@@ -119,37 +120,12 @@ namespace FYP
                         break;
                 }
 
-                var dt = new DataTable();
-                dt = GetSkillsData();
-                {
-                    var xp =
-                        new SqlCommand(
-                            "Insert into Skills(Id, EmpName, Skill, ExpertiseLevel, EmpLastName, ExpertiseLevelString) Values(@Id, @EmpName, @Skill, @ExpertiseLevel, @EmpLastName, @ExpertiseLevelString)",
-                            conn);
-                    var newId = (dt.Rows.Count + 1).ToString();
-                    xp.Parameters.AddWithValue("@Id", newId);
-                    xp.Parameters.AddWithValue("@EmpName", EmpFirstName);
-                    xp.Parameters.AddWithValue("@Skill", txtSkill.Text);
-                    xp.Parameters.AddWithValue("@ExpertiseLevel", intExpertiseLevel.ToString());
-                    xp.Parameters.AddWithValue("@EmpLastName", EmpLastName);
-                    xp.Parameters.AddWithValue("@ExpertiseLevelString", lstExpertiseLevel.SelectedValue);
-
-                    conn.Open();
-                    xp.ExecuteNonQuery();
-                    conn.Close();
-                }
+                GlobalClass.InsertNewDataRowInSkillsDb(EmpFirstName, txtSkill.Text, intExpertiseLevel.ToString(), EmpLastName, lstExpertiseLevel.SelectedValue, SelectedTeam);
             }
 
             Response.Redirect("~/HomePage.aspx");
         }
 
-        private static DataTable GetSkillsData()
-        {
-            var dt = new DataTable();
-            var cmd = "select Skill,ExpertiseLevel from Skills";
-            var adp = new SqlDataAdapter(cmd, conn);
-            adp.Fill(dt);
-            return dt;
-        }
+        
     }
 }

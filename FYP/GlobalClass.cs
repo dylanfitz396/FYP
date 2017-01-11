@@ -19,13 +19,57 @@ namespace FYP
             "Database1ConnectionString1"].ConnectionString);
 
 
-        public static DataTable GetEmployeeData(string EmpFirstName, string EmpLastName)
+        public static DataTable GetSelectedEmployeeData(string EmpFirstName, string EmpLastName)
         { 
             var dt = new DataTable();
             var cmd = "select Skill,ExpertiseLevel, ExpertiseLevelString from Skills where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "'";
             var adp = new SqlDataAdapter(cmd, conn);
             adp.Fill(dt);
             return dt;
+        }
+
+        public static DataTable GetSkillsData()
+        {
+            var dt = new DataTable();
+            var cmd = "select Skill,ExpertiseLevel from Skills";
+            var adp = new SqlDataAdapter(cmd, conn);
+            adp.Fill(dt);
+            return dt;
+        }
+
+        public static string GetSelectedEmployeesTeam(string EmpFirstName, string EmpLastName)
+        {
+            var cmd = new SqlCommand(
+                        "Select SelectedTeam from Skills Where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "'",
+                        conn);
+            conn.Open();
+            string SelectedTeam = cmd.ExecuteScalar().ToString();
+            conn.Close();
+            return SelectedTeam;
+        }
+
+        public static void InsertNewDataRowInSkillsDb(string EmpFirstName, string Skill, string ExpertiseLevelNum, string EmpLastName, string ExpertiseLevelString, string SelectedTeam)
+        {
+            var dt = new DataTable();
+            dt = GetSkillsData();
+            {
+                var xp =
+                    new SqlCommand(
+                        "Insert into Skills(Id, EmpName, Skill, ExpertiseLevel, EmpLastName, ExpertiseLevelString, SelectedTeam) Values(@Id, @EmpName, @Skill, @ExpertiseLevel, @EmpLastName, @ExpertiseLevelString, @SelectedTeam)",
+                        conn);
+                var newId = (dt.Rows.Count + 1).ToString();
+                xp.Parameters.AddWithValue("@Id", newId);
+                xp.Parameters.AddWithValue("@EmpName", EmpFirstName);
+                xp.Parameters.AddWithValue("@Skill", Skill);
+                xp.Parameters.AddWithValue("@ExpertiseLevel", ExpertiseLevelNum);
+                xp.Parameters.AddWithValue("@EmpLastName", EmpLastName);
+                xp.Parameters.AddWithValue("@ExpertiseLevelString", ExpertiseLevelString);
+                xp.Parameters.AddWithValue("@SelectedTeam", SelectedTeam);
+
+                conn.Open();
+                xp.ExecuteNonQuery();
+                conn.Close();
+            }
         }
 
         public static string GetOpeningChartScript()
@@ -47,7 +91,7 @@ namespace FYP
             var dt = new DataTable();
             try
             {
-                dt = GetEmployeeData(EmpFirstName, EmpLastName);
+                dt = GetSelectedEmployeeData(EmpFirstName, EmpLastName);
 
                 //data
                 str.Append("google.setOnLoadCallback(drawChart" + chartNum + ");");

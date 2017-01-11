@@ -22,8 +22,17 @@ namespace FYP
             var container = Master.FindControl("MainContent");
             int DropDownListIndex = 1;
 
+            //populate the dropdownlist for Team Name
+            string controlNamelstSelectTeam = "lstSelectTeam";
+            var controllstSelectTeam = container.FindControl(controlNamelstSelectTeam);
+            DropDownList lstSelectTeam = (DropDownList)controllstSelectTeam;
+
+            lstSelectTeam.Items.Add("Developers");
+            lstSelectTeam.Items.Add("Analysts");
+            lstSelectTeam.Items.Add("QA");
+
             //populate the dropdownlist for expertise level
-            for(DropDownListIndex = 1; DropDownListIndex < 4; DropDownListIndex++)
+            for (DropDownListIndex = 1; DropDownListIndex < 4; DropDownListIndex++)
             {
                 string controlNamelstExpertiseLevel = "lstExpertiseLevel" + DropDownListIndex.ToString();
                 var controllstExpertiseLevel = container.FindControl(controlNamelstExpertiseLevel);
@@ -86,17 +95,21 @@ namespace FYP
             string EmpFirstName = currentUser.FirstName;
             string EmpLastName = currentUser.LastName;
             int rowNum = 1;
+            var container = Master.FindControl("MainContent");
 
+            string controlNamelstSelectTeam = "lstSelectTeam";
+            var controllstSelectTeam = container.FindControl(controlNamelstSelectTeam);
+            DropDownList lstSelectTeam = (DropDownList)controllstSelectTeam;
+
+            //Enter values for skill, expertise level and selected team into the database on each row entered
             for (rowNum = 1; rowNum < 9; rowNum++)
             {
                 string controlNameSkill = "txtSkill" + rowNum.ToString();
-                var containerSkill = Master.FindControl("MainContent");
-                var controlSkill = containerSkill.FindControl(controlNameSkill);
+                var controlSkill = container.FindControl(controlNameSkill);
                 TextBox txtSkill = (TextBox)controlSkill;
 
                 string controlNameExpertiseLevel = "lstExpertiseLevel" + rowNum.ToString();
-                var containerExpertiseLevel = Master.FindControl("MainContent");
-                var controlExpertiseLevel = containerExpertiseLevel.FindControl(controlNameExpertiseLevel);
+                var controlExpertiseLevel = container.FindControl(controlNameExpertiseLevel);
                 DropDownList lstExpertiseLevel = (DropDownList)controlExpertiseLevel;
 
                 if (txtSkill == null)
@@ -130,39 +143,13 @@ namespace FYP
                             break;
                     }
 
-                    var dt = new DataTable();
-                    dt = GetSkillsData();
-                    {
-                        var xp =
-                            new SqlCommand(
-                                "Insert into Skills(Id, EmpName, Skill, ExpertiseLevel, EmpLastName, ExpertiseLevelString) Values(@Id, @EmpName, @Skill, @ExpertiseLevel, @EmpLastName, @ExpetiseLevelString)",
-                                conn);
-                        var newId = (dt.Rows.Count + 1).ToString();
-                        xp.Parameters.AddWithValue("@Id", newId);
-                        xp.Parameters.AddWithValue("@EmpName", EmpFirstName);
-                        xp.Parameters.AddWithValue("@Skill", txtSkill.Text);
-                        xp.Parameters.AddWithValue("@ExpertiseLevel", intExpertiseLevel.ToString());
-                        xp.Parameters.AddWithValue("@EmpLastName", EmpLastName);
-                        xp.Parameters.AddWithValue("@ExpertiseLevelString", lstExpertiseLevel.SelectedValue);
+                    GlobalClass.InsertNewDataRowInSkillsDb(EmpFirstName, txtSkill.Text, intExpertiseLevel.ToString(), EmpLastName, lstExpertiseLevel.SelectedValue, lstSelectTeam.SelectedValue);
 
-                        conn.Open();
-                        xp.ExecuteNonQuery();
-                        conn.Close();
-                    }
                 }
             }
 
             IdentityHelper.RedirectToReturnUrl("/HomePage.aspx", Response);
 
-        }
-
-        private static DataTable GetSkillsData()
-        {
-            var dt = new DataTable();
-            var cmd = "select Skill,ExpertiseLevel from Skills";
-            var adp = new SqlDataAdapter(cmd, conn);
-            adp.Fill(dt);
-            return dt;
         }
 
     }
