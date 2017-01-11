@@ -15,22 +15,22 @@ namespace FYP
             {
                 EmpFirstName = "Dylan";
                 EmpLastName = "Fitzgerald";
-                result = GlobalClass.BindChart(EmpFirstName, EmpLastName);
+                result = GlobalClass.BindChart(EmpFirstName, EmpLastName, 1);
                 lt.Text = result.Replace('*', '"');
 
                 EmpFirstName = "Sarah";
                 EmpLastName = "Test";
-                result = GlobalClass.BindChart(EmpFirstName, EmpLastName);
+                result = GlobalClass.BindChart(EmpFirstName, EmpLastName, 1);
                 lt1.Text = result.Replace('*', '"');
 
                 EmpFirstName = "Chris";
                 EmpLastName = "Test";
-                result = GlobalClass.BindChart(EmpFirstName, EmpLastName);
+                result = GlobalClass.BindChart(EmpFirstName, EmpLastName, 1);
                 lt2.Text = result.Replace('*', '"');
 
                 EmpFirstName = "Megan";
                 EmpLastName = "Test";
-                result = GlobalClass.BindChart(EmpFirstName, EmpLastName);
+                result = GlobalClass.BindChart(EmpFirstName, EmpLastName, 1);
                 lt3.Text = result.Replace('*', '"');
             }
         }

@@ -19,7 +19,7 @@ namespace FYP
 
             if (Page.IsPostBack == false)
             {
-                result = GlobalClass.BindChart(EmpFirstName, EmpLastName);
+                result = GlobalClass.BindChart(EmpFirstName, EmpLastName, 1);
                 lt.Text = result.Replace('*', '"');
             }
         }

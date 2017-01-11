@@ -3,18 +3,21 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
         <div class="jumbotron">
-        <asp:Literal ID="lt" runat="server"></asp:Literal>
-        <div id="chart_div"></div>   
-           
+            <asp:Literal ID="lt" runat="server"></asp:Literal>
+            <%--<asp:Literal ID="lt1" runat="server"></asp:Literal>--%>
+        
+            <div id="chart_div1"></div>   
+            <div id="chart_div2"></div> 
+
     
     <div class="form-horizontal">
         <div class="form-group">
         <div class="col-md-9">
-            <asp:Button class="btn btn-info btn-sm" ID="btnDylan" runat="server" Text="Dylan" OnClick="btnDylan_Click" />
+            <%--<asp:Button class="btn btn-info btn-sm" ID="btnDylan" runat="server" Text="Dylan" OnClick="btnDylan_Click" />
             <asp:Button class="btn btn-info btn-sm" ID="btnSarah" runat="server" Text="Sarah" OnClick="btnSarah_Click" />
             <asp:Button class="btn btn-info btn-sm" ID="btnMegan" runat="server" Text="Megan" OnClick="btnMegan_Click" />
-            <asp:Button class="btn btn-info btn-sm" ID="btnChris" runat="server" Text="Chris" OnClick="btnChris_Click" />
-            </div>
+            <asp:Button class="btn btn-info btn-sm" ID="btnChris" runat="server" Text="Chris" OnClick="btnChris_Click" />--%>
+        </div>
             
     
             
