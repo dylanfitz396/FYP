@@ -29,7 +29,7 @@ namespace FYP
                 {
                     var currentUserId = User.Identity.GetUserId();
                     var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                    var currentUser = manager.FindById(User.Identity.GetUserId());
+                    var currentUser = manager.FindById(currentUserId);
                     EmpFirstName = currentUser.FirstName;
                     EmpLastName = currentUser.LastName;
                 }
@@ -90,7 +90,7 @@ namespace FYP
         {
             var currentUserId = User.Identity.GetUserId();
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            var currentUser = manager.FindById(User.Identity.GetUserId());
+            var currentUser = manager.FindById(currentUserId);
             EmpFirstName = currentUser.FirstName;
             EmpLastName = currentUser.LastName;
             string SelectedTeam = GlobalClass.GetSelectedEmployeesTeam(EmpFirstName, EmpLastName);

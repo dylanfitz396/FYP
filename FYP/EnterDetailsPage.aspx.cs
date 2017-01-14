@@ -91,7 +91,7 @@ namespace FYP
         {
             var currentUserId = User.Identity.GetUserId();
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            var currentUser = manager.FindById(User.Identity.GetUserId());
+            var currentUser = manager.FindById(currentUserId);
             string EmpFirstName = currentUser.FirstName;
             string EmpLastName = currentUser.LastName;
             int rowNum = 1;

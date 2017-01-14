@@ -1,4 +1,8 @@
-﻿using System;
+﻿using FYP.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Web.UI;
 
@@ -14,15 +18,27 @@ namespace FYP
         {
             if (Page.IsPostBack == false)
             {
+                var currentUserId = User.Identity.GetUserId();
+                var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var currentUser = manager.FindById(currentUserId);
+                EmpFirstName = currentUser.FirstName;
+                EmpLastName = currentUser.LastName;
+                string selectedEmployeesTeam = GlobalClass.GetSelectedEmployeesTeam(EmpFirstName, EmpLastName);
+                List<Tuple<string, string>> TeamMembers = GlobalClass.GetTeamMembers(selectedEmployeesTeam);
+                int TeamMemberIndex = 0;
+
                 script.Append(GlobalClass.GetOpeningChartScript());
 
-                EmpFirstName = "Chris";
-                EmpLastName = "Test";                
-                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, 1));
+                for (TeamMemberIndex = 0; TeamMemberIndex < TeamMembers.Count; TeamMemberIndex++)
+                {
+                    EmpFirstName = TeamMembers[TeamMemberIndex].Item1;
+                    EmpLastName = TeamMembers[TeamMemberIndex].Item2;
+                    script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, TeamMemberIndex+1));
+                }
 
-                EmpFirstName = "Dylan";
-                EmpLastName = "Fitzgerald";
-                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, 2));
+                //EmpFirstName = TeamMembers[1].Item1;
+                //EmpLastName = TeamMembers[1].Item2;
+                //script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, 2));
 
                 script.Append(GlobalClass.GetClosingChartScript());
                 script.Replace('*', '"');
@@ -30,6 +46,7 @@ namespace FYP
             }
         }
 
+        
         //protected void btnDylan_Click(object sender, EventArgs e)
         //{
         //    EmpFirstName = "Dylan";
