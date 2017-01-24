@@ -5,6 +5,6 @@
         <div class="jumbotron">
             <h1>Your Home Page</h1>
         <asp:Literal ID="lt" runat="server"></asp:Literal>
-        <div id="chart_div"></div>
+        <div id="chart_div1"></div>
             </div>
 </asp:Content>

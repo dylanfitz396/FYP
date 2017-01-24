@@ -61,9 +61,48 @@ namespace FYP
             }
         }
 
+        public static int GetExpertiseLevel(string EmpFirstName, string EmpLastName, string Skill)
+        {
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                var cmd = new SqlCommand(
+                        "Select ExpertiseLevel from Skills Where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "' and Skill = '" + Skill + "'",
+                        myCon);
+                myCon.Open();
+                int intExpertiseLevel =  int.Parse(cmd.ExecuteScalar().ToString());
+                myCon.Close();
+                return intExpertiseLevel;
+            }
+        }
+
+        public static List<string> GetSelectedEmployeesSkills(string EmpFirstName, string EmpLastName)
+        {
+            var lstSkills = new List<string>();
+
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                //The SQL you want to execute
+                var cmd = new SqlCommand(
+                            "Select Distinct Skill from Skills Where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "'",
+                            myCon);
+                //Open the connection to the database
+                myCon.Open();
+                //execute your command
+                using (IDataReader dataReader = cmd.ExecuteReader())
+                {
+                    //Loop through your results
+                    while (dataReader.Read())
+                    {
+                        lstSkills.Add(Convert.ToString(dataReader["Skill"]).ToUpper());
+                    }
+                }
+            }
+            return lstSkills;
+        }
+
         public static List<Tuple<string, string>> GetTeamMembers(string TeamName)
         {
-            List<string> lstFirstName = new List<string>();
+            //List<string> lstFirstName = new List<string>();
             var lst = new List<Tuple<string, string>>();
 
             using (SqlConnection myCon = new SqlConnection(connStr))
@@ -87,8 +126,64 @@ namespace FYP
             return lst;
         }
 
+        public static void UpdateSelectedTeamInSkillsDb(string EmpFirstName, string EmpLastName, string SelectedTeam)
+        {
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                var dt = new DataTable();
+                dt = GetSkillsData();
+                {
+                    var xp =
+                        new SqlCommand(
+                            "Update Skills SET SelectedTeam = '" + SelectedTeam + "' Where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "'",
+                            myCon);
 
-    public static void InsertNewDataRowInSkillsDb(string EmpFirstName, string Skill, string ExpertiseLevelNum, string EmpLastName, string ExpertiseLevelString, string SelectedTeam)
+                    myCon.Open();
+                    xp.ExecuteNonQuery();
+                    myCon.Close();
+                }
+            }
+        }
+
+        public static void UpdateDataRowInSkillsDb(string EmpFirstName, string Skill, string ExpertiseLevelNum, string EmpLastName, string ExpertiseLevelString, string SelectedTeam)
+        {
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                var dt = new DataTable();
+                dt = GetSkillsData();
+                {
+                    var xp =
+                        new SqlCommand(
+                            "Update Skills SET ExpertiseLevel = '" + ExpertiseLevelNum + "', ExpertiseLevelString = '" + ExpertiseLevelString + "', SelectedTeam = '" + SelectedTeam + "' Where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "' and Skill = '" + Skill + "'",
+                            myCon);
+
+                    myCon.Open();
+                    xp.ExecuteNonQuery();
+                    myCon.Close();
+                }
+            }
+        }
+
+        public static void DeleteDataRowInSkillsDb(string EmpFirstName, string Skill, string EmpLastName)
+        {
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                var dt = new DataTable();
+                dt = GetSkillsData();
+                {
+                    var xp =
+                        new SqlCommand(
+                            "Delete From Skills Where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "' and Skill = '" + Skill + "'",
+                            myCon);
+
+                    myCon.Open();
+                    xp.ExecuteNonQuery();
+                    myCon.Close();
+                }
+            }
+        }
+
+        public static void InsertNewDataRowInSkillsDb(string EmpFirstName, string Skill, string ExpertiseLevelNum, string EmpLastName, string ExpertiseLevelString, string SelectedTeam)
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
             {

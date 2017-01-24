@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Text;
 using System.Web.UI;
 
 namespace FYP
@@ -15,12 +16,15 @@ namespace FYP
             var currentUser = manager.FindById(currentUserId);
             string EmpFirstName = currentUser.FirstName;
             string EmpLastName = currentUser.LastName;
-            string result;
+            StringBuilder script = new StringBuilder();
 
             if (Page.IsPostBack == false)
             {
-                result = GlobalClass.BindChart(EmpFirstName, EmpLastName, 1);
-                lt.Text = result.Replace('*', '"');
+                script.Append(GlobalClass.GetOpeningChartScript());
+                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, 1));
+                script.Append(GlobalClass.GetClosingChartScript());
+                script.Replace('*', '"');
+                lt.Text = script.ToString();
             }
         }
     }

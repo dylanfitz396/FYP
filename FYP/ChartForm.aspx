@@ -23,6 +23,40 @@
                     <div id="chart_div3"></div>
                 </div> 
                 </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <div id="chart_div4"></div>
+                </div> 
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <div id="chart_div5"></div>
+                </div> 
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <div id="chart_div6"></div>
+                </div> 
+                </div><div class="col-md-6">
+                <div class="form-group">
+                    <div id="chart_div7"></div>
+                </div> 
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <div id="chart_div8"></div>
+                </div> 
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <div id="chart_div9"></div>
+                </div> 
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    <div id="chart_div10"></div>
+                </div> 
+                </div>
             </div>
         </div>
 
