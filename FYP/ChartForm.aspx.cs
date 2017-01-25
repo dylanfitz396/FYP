@@ -26,6 +26,8 @@ namespace FYP
                 string selectedEmployeesTeam = GlobalClass.GetSelectedEmployeesTeam(EmpFirstName, EmpLastName);
                 List<Tuple<string, string>> TeamMembers = GlobalClass.GetTeamMembers(selectedEmployeesTeam);
                 int TeamMemberIndex = 0;
+                int ChartWidth = 550;
+                int ChartHeight = 250;
 
                 script.Append(GlobalClass.GetOpeningChartScript());
 
@@ -33,12 +35,8 @@ namespace FYP
                 {
                     EmpFirstName = TeamMembers[TeamMemberIndex].Item1;
                     EmpLastName = TeamMembers[TeamMemberIndex].Item2;
-                    script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, TeamMemberIndex+1));
+                    script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, TeamMemberIndex+1, ChartWidth, ChartHeight));
                 }
-
-                //EmpFirstName = TeamMembers[1].Item1;
-                //EmpLastName = TeamMembers[1].Item2;
-                //script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, 2));
 
                 script.Append(GlobalClass.GetClosingChartScript());
                 script.Replace('*', '"');

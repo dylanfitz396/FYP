@@ -5,6 +5,10 @@
         <div class="jumbotron">
             <div class="form-horizontal">
 
+            <h1>Team Charts</h1>
+                <h4>View the charts of employees from different teams!</h4>
+                <hr />
+
             <asp:Literal ID="lt" runat="server"></asp:Literal>
         
             <div class="row">
@@ -75,7 +79,7 @@
             
             
 
-    <a href="InputPage.aspx" class="btn btn-success btn-sm">Update Details &raquo;</a>
+    <a href="InputPage.aspx" class="btn btn-info btn-sm">Update Details &raquo;</a>
         </div>
         </div>
             </div>

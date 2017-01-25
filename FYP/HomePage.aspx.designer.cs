@@ -13,6 +13,24 @@ namespace FYP {
     public partial class HomePage {
         
         /// <summary>
+        /// SelectedTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SelectedTeam;
+        
+        /// <summary>
+        /// lblSelectedTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSelectedTeam;
+        
+        /// <summary>
         /// lt control.
         /// </summary>
         /// <remarks>

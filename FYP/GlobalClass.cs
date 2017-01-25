@@ -241,7 +241,7 @@ namespace FYP
             return closingScript;
         }
 
-        public static string BindChart(string EmpFirstName, string EmpLastName, int chartNum)
+        public static string BindChart(string EmpFirstName, string EmpLastName, int chartNum, int width, int height)
         {
             var dt = new DataTable();
             try
@@ -268,7 +268,7 @@ namespace FYP
                 //options
                 str.Append(" var chart = new google.visualization.BarChart(document.getElementById('chart_div" + chartNum + "'));");
                 //str.Append(" google.visualization.events.addListener(chart, 'ready', changeBorderRadius)); google.visualization.events.addListener(chart, 'select', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseover', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseout', changeBorderRadius); function changeBorderRadius() { chartColumns = document.getElementById('chart_div').getElementsByTagName('rect'); Array.prototype.forEach.call(chartColumns, function(column) { if ((colors.indexOf(column.getAttribute('fill')) > -1) || (column.getAttribute('fill') === 'none') || (column.getAttribute('stroke') === '#ffffff')) { column.setAttribute('rx', 20); column.setAttribute('ry', 20); } }");
-                str.Append(" chart.draw(data" + chartNum + ", {width: 550, height: 250, title: 'Skill Chart: " + EmpFirstName +
+                str.Append(" chart.draw(data" + chartNum + ", {width: " + width + ", height: " + height + ", title: 'Skill Chart: " + EmpFirstName +
                            "',");
                 //str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
                 str.Append("hAxis: { textPosition: 'none' },");

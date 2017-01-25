@@ -17,11 +17,16 @@ namespace FYP
             string EmpFirstName = currentUser.FirstName;
             string EmpLastName = currentUser.LastName;
             StringBuilder script = new StringBuilder();
+            int chartWidth = 760;
+            int chartHeight = 360;
 
             if (Page.IsPostBack == false)
             {
+                string teamName = GlobalClass.GetSelectedEmployeesTeam(EmpFirstName, EmpLastName);
+                lblSelectedTeam.Text = teamName;
+
                 script.Append(GlobalClass.GetOpeningChartScript());
-                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, 1));
+                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, 1, chartWidth, chartHeight));
                 script.Append(GlobalClass.GetClosingChartScript());
                 script.Replace('*', '"');
                 lt.Text = script.ToString();
