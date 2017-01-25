@@ -12,7 +12,12 @@ namespace FYP
     {
         private string EmpFirstName;
         private string EmpLastName;
+        private string selectedEmployeesTeam;
+        List<Tuple<string, string>> TeamMembers;
         private static StringBuilder script = new StringBuilder();
+        int TeamMemberIndex = 0;
+        int ChartWidth = 550;
+        int ChartHeight = 250;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,58 +28,43 @@ namespace FYP
                 var currentUser = manager.FindById(currentUserId);
                 EmpFirstName = currentUser.FirstName;
                 EmpLastName = currentUser.LastName;
-                string selectedEmployeesTeam = GlobalClass.GetSelectedEmployeesTeam(EmpFirstName, EmpLastName);
-                List<Tuple<string, string>> TeamMembers = GlobalClass.GetTeamMembers(selectedEmployeesTeam);
-                int TeamMemberIndex = 0;
-                int ChartWidth = 550;
-                int ChartHeight = 250;
+                
+                
 
-                script.Append(GlobalClass.GetOpeningChartScript());
-
-                for (TeamMemberIndex = 0; TeamMemberIndex < TeamMembers.Count; TeamMemberIndex++)
+                //populate seleted team dropdownlist
+                if (lstSelectedTeam.Items.Count == 0)
                 {
-                    EmpFirstName = TeamMembers[TeamMemberIndex].Item1;
-                    EmpLastName = TeamMembers[TeamMemberIndex].Item2;
-                    script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, TeamMemberIndex+1, ChartWidth, ChartHeight));
-                }
+                    lstSelectedTeam.Items.Add("Developers");
+                    lstSelectedTeam.Items.Add("Analysts");
+                    lstSelectedTeam.Items.Add("QA");
 
-                script.Append(GlobalClass.GetClosingChartScript());
-                script.Replace('*', '"');
-                lt.Text = script.ToString();
+                    selectedEmployeesTeam = GlobalClass.GetSelectedEmployeesTeam(EmpFirstName, EmpLastName);
+                    lstSelectedTeam.SelectedValue = selectedEmployeesTeam;
+                }
+                
             }
+        
         }
 
-        
-        //protected void btnDylan_Click(object sender, EventArgs e)
-        //{
-        //    EmpFirstName = "Dylan";
-        //    EmpLastName = "Fitzgerald";
-        //    result = GlobalClass.BindChart(EmpFirstName, EmpLastName, 1);
-        //    lt.Text = result.Replace('*', '"');
-        //}
+        protected void btnChangeTeam_Click(object sender, EventArgs e)
+        {
+            selectedEmployeesTeam = lstSelectedTeam.SelectedValue;
+            TeamMembers = GlobalClass.GetTeamMembers(selectedEmployeesTeam);
 
-        //protected void btnChris_Click(object sender, EventArgs e)
-        //{
-        //    EmpFirstName = "Chris";
-        //    EmpLastName = "Test";
-        //    result = GlobalClass.BindChart(EmpFirstName, EmpLastName, 1);
-        //    lt.Text = result.Replace('*', '"');
-        //}
+            script.Append(GlobalClass.GetOpeningChartScript());
 
-        //protected void btnSarah_Click(object sender, EventArgs e)
-        //{
-        //    EmpFirstName = "Sarah";
-        //    EmpLastName = "Test";
-        //    result = GlobalClass.BindChart(EmpFirstName, EmpLastName, 1);
-        //    lt.Text = result.Replace('*', '"');
-        //}
+            for (TeamMemberIndex = 0; TeamMemberIndex < TeamMembers.Count; TeamMemberIndex++)
+            {
+                EmpFirstName = TeamMembers[TeamMemberIndex].Item1;
+                EmpLastName = TeamMembers[TeamMemberIndex].Item2;
+                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, TeamMemberIndex + 1, ChartWidth, ChartHeight));
+            }
 
-        //protected void btnMegan_Click(object sender, EventArgs e)
-        //{
-        //    EmpFirstName = "Megan";
-        //    EmpLastName = "Test";
-        //    result = GlobalClass.BindChart(EmpFirstName, EmpLastName, 1);
-        //    lt.Text = result.Replace('*', '"');
-        //}
+            script.Append(GlobalClass.GetClosingChartScript());
+            script.Replace('*', '"');
+            lt.Text = script.ToString();
+            //Response.Redirect("ChartForm.aspx");
+        }
+
     }
 }

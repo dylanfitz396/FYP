@@ -6,8 +6,16 @@
             <div class="form-horizontal">
 
             <h1>Team Charts</h1>
-                <h4>View the charts of employees from different teams!</h4>
+                <h4>View the Skills Charts of employees from different teams!</h4>
                 <hr />
+
+            <div class="form-group">
+                <asp:Label ID="SelectedTeam" runat="server" CssClass="col-md-3 control-label">Selected Team:</asp:Label>
+                <asp:DropDownList ID="lstSelectedTeam" runat="server" CssClass="col-md-4 form-control"></asp:DropDownList>
+                <div class="col-md-5">
+                <asp:Button ID="btnChangeTeam" CssClass="btn btn-primary btn-sm form-control" runat="server" OnClick="btnChangeTeam_Click" Text="Change Team >>"></asp:Button>
+                </div>
+            </div>
 
             <asp:Literal ID="lt" runat="server"></asp:Literal>
         
@@ -64,24 +72,6 @@
             </div>
         </div>
 
-    
-    <div class="form-horizontal">
-        <div class="form-group">
-        <div class="col-md-9">
-            <%--<asp:Button class="btn btn-info btn-sm" ID="btnDylan" runat="server" Text="Dylan" OnClick="btnDylan_Click" />
-            <asp:Button class="btn btn-info btn-sm" ID="btnSarah" runat="server" Text="Sarah" OnClick="btnSarah_Click" />
-            <asp:Button class="btn btn-info btn-sm" ID="btnMegan" runat="server" Text="Megan" OnClick="btnMegan_Click" />
-            <asp:Button class="btn btn-info btn-sm" ID="btnChris" runat="server" Text="Chris" OnClick="btnChris_Click" />--%>
-        </div>
-            
-    
-            
-            
-            
-
-    <a href="InputPage.aspx" class="btn btn-info btn-sm">Update Details &raquo;</a>
-        </div>
-        </div>
             </div>
 
 </asp:Content>

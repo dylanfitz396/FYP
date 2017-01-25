@@ -13,6 +13,33 @@ namespace FYP {
     public partial class ChartForm {
         
         /// <summary>
+        /// SelectedTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SelectedTeam;
+        
+        /// <summary>
+        /// lstSelectedTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList lstSelectedTeam;
+        
+        /// <summary>
+        /// btnChangeTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnChangeTeam;
+        
+        /// <summary>
         /// lt control.
         /// </summary>
         /// <remarks>
