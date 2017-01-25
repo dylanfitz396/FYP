@@ -14,8 +14,6 @@ namespace FYP
 {
     public partial class GlobalClass : Page
     {
-
-        public static StringBuilder str = new StringBuilder();
         //Get connection string from web.config
         //public static SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[
         //    "Database1ConnectionString1"].ConnectionString);
@@ -243,6 +241,7 @@ namespace FYP
 
         public static string BindChart(string EmpFirstName, string EmpLastName, int chartNum, int width, int height)
         {
+            StringBuilder str = new StringBuilder();
             var dt = new DataTable();
             try
             {

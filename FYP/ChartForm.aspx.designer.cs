@@ -31,13 +31,13 @@ namespace FYP {
         protected global::System.Web.UI.WebControls.DropDownList lstSelectedTeam;
         
         /// <summary>
-        /// btnChangeTeam control.
+        /// btnSelectTeam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnChangeTeam;
+        protected global::System.Web.UI.WebControls.Button btnSelectTeam;
         
         /// <summary>
         /// lt control.

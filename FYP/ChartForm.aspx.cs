@@ -46,8 +46,9 @@ namespace FYP
         
         }
 
-        protected void btnChangeTeam_Click(object sender, EventArgs e)
+        protected void btnSelectTeam_Click(object sender, EventArgs e)
         {
+            script.Clear();
             selectedEmployeesTeam = lstSelectedTeam.SelectedValue;
             TeamMembers = GlobalClass.GetTeamMembers(selectedEmployeesTeam);
 
