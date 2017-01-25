@@ -219,7 +219,6 @@ namespace FYP
 
                 GlobalClass.UpdateDataRowInSkillsDb(EmpFirstName, txtSkill.Text, intExpertiseLevel.ToString(), EmpLastName, lstExpertiseLevel.SelectedValue, lstSelectedTeam.SelectedValue);
                 Response.Redirect(Request.RawUrl);
-                btnHome.Focus();
             }
         }
 
@@ -252,7 +251,6 @@ namespace FYP
 
                 GlobalClass.InsertNewDataRowInSkillsDb(EmpFirstName, txtSkill.Text, intExpertiseLevel.ToString(), EmpLastName, lstExpertiseLevel.SelectedValue, lstSelectedTeam.SelectedValue);
                 Response.Redirect(Request.RawUrl);
-                btnHome.Focus();
             }
         }
 
@@ -260,7 +258,6 @@ namespace FYP
         {
             GlobalClass.DeleteDataRowInSkillsDb(EmpFirstName, txtSkill.Text, EmpLastName);
             Response.Redirect(Request.RawUrl);
-            btnHome.Focus();
         }
 
         protected void btnHome_Click(object sender, EventArgs e)

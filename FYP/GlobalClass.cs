@@ -187,14 +187,15 @@ namespace FYP
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
             {
-                var dt = new DataTable();
-                dt = GetSkillsData();
+                //var dt = new DataTable();
+                //dt = GetSkillsData();
+                int newId = GetLastRowIdFromSkills() + 1;
                 {
                     var xp =
                         new SqlCommand(
                             "Insert into Skills(Id, EmpName, Skill, ExpertiseLevel, EmpLastName, ExpertiseLevelString, SelectedTeam) Values(@Id, @EmpName, @Skill, @ExpertiseLevel, @EmpLastName, @ExpertiseLevelString, @SelectedTeam)",
                             myCon);
-                    var newId = (dt.Rows.Count + 1).ToString();
+                    //var newId = (dt.Rows.Count + 1).ToString();
                     xp.Parameters.AddWithValue("@Id", newId);
                     xp.Parameters.AddWithValue("@EmpName", EmpFirstName);
                     xp.Parameters.AddWithValue("@Skill", Skill);
@@ -207,6 +208,22 @@ namespace FYP
                     xp.ExecuteNonQuery();
                     myCon.Close();
                 }
+            }
+        }
+
+        public static int GetLastRowIdFromSkills()
+        {
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                var cmd =
+                        new SqlCommand(
+                            "Select MAX(Id) From Skills",
+                            myCon);
+
+                myCon.Open();
+                int LastRowId = int.Parse(cmd.ExecuteScalar().ToString());
+                myCon.Close();
+                return LastRowId;
             }
         }
 
