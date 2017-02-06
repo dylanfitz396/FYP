@@ -13,7 +13,6 @@
                 <asp:Label ID="SelectedTeam" runat="server" CssClass="col-md-3 control-label">Selected Team:</asp:Label>
                 <asp:DropDownList ID="lstSelectedTeam" runat="server" CssClass="col-md-4 form-control"></asp:DropDownList>
                 <div class="col-md-2">
-                <%--<asp:Label ID="Label1" runat="server" CssClass="col-sm-1 control-label"> </asp:Label>--%>
                 <asp:Button ID="btnSelectTeam" CssClass="btn btn-primary btn-sm form-control" runat="server" OnClick="btnSelectTeam_Click" Text="Team Members View >>"></asp:Button>
                 </div>
                 <div class="col-md-1">
