@@ -33,6 +33,38 @@ namespace FYP
             }
         }
 
+        public static DataTable GetMaxTeamData(string selectedTeam)
+        {
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                var dt = new DataTable();
+                var cmd = "SELECT Skill, MAX(ExpertiseLevel) ExpertiseLevel FROM Skills where SelectedTeam = '" + selectedTeam + "' GROUP BY Skill";
+                //var cmd = "select Skill, EmpName, EmpLastName, MAX(ExpertiseLevel) as MaxExpertiseLevel from Skills " + 
+                //        "where SelectedTeam = '" + selectedTeam + "' group by Skill";
+                var adp = new SqlDataAdapter(cmd, myCon);
+                adp.Fill(dt);
+                return dt;
+            }
+        }
+
+
+
+        public static DataTable GetSelectedTeamData(string selectedTeam)
+        {
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                var dt = new DataTable();
+                var cmd = "SELECT a.Skill, MIN(a.EmpName), MIN(a.EmpLastName), MIN(a.ExpertiseLevel) FROM Skills a " +
+                            "INNER JOIN(SELECT Skill, MAX(ExpertiseLevel) ExpertiseLevel FROM Skills where SelectedTeam = '" + selectedTeam + "' GROUP BY Skill" +
+                            ") b ON a.Skill = b.Skill AND a.ExpertiseLevel = b.ExpertiseLevel Group By a.Skill";
+                //var cmd = "select Skill, EmpName, EmpLastName, MAX(ExpertiseLevel) as MaxExpertiseLevel from Skills " + 
+                //        "where SelectedTeam = '" + selectedTeam + "' group by Skill";
+                var adp = new SqlDataAdapter(cmd, myCon);
+                adp.Fill(dt);
+                return dt;
+            }
+        }
+
         public static DataTable GetSkillsData()
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
@@ -82,6 +114,31 @@ namespace FYP
                 //The SQL you want to execute
                 var cmd = new SqlCommand(
                             "Select Distinct Skill from Skills Where EmpName = '" + EmpFirstName + "' and EmpLastName = '" + EmpLastName + "'",
+                            myCon);
+                //Open the connection to the database
+                myCon.Open();
+                //execute your command
+                using (IDataReader dataReader = cmd.ExecuteReader())
+                {
+                    //Loop through your results
+                    while (dataReader.Read())
+                    {
+                        lstSkills.Add(Convert.ToString(dataReader["Skill"]).ToUpper());
+                    }
+                }
+            }
+            return lstSkills;
+        }
+
+        public static List<string> GetAllSkills()
+        {
+            var lstSkills = new List<string>();
+
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                //The SQL you want to execute
+                var cmd = new SqlCommand(
+                            "Select Distinct Skill from Skills",
                             myCon);
                 //Open the connection to the database
                 myCon.Open();
@@ -246,6 +303,7 @@ namespace FYP
             try
             {
                 dt = GetSelectedEmployeeData(EmpFirstName, EmpLastName);
+               
 
                 //data
                 str.Append("google.setOnLoadCallback(drawChart" + chartNum + ");");
@@ -278,6 +336,54 @@ namespace FYP
                 str.Append("vAxis: { title: 'Skill' },");
                 str.Append("}); }");
                 
+
+                return str.ToString();
+            }
+            catch
+            {
+                return str.ToString();
+            }
+        }
+
+        public static string CreateTeamStrengthChart(string selectedTeam, int chartNum, int width, int height)
+        {
+            StringBuilder str = new StringBuilder();
+            var dt = new DataTable();
+            
+            try
+            {
+                //dt = GetSelectedEmployeeData(EmpFirstName, EmpLastName);
+                dt = GetMaxTeamData(selectedTeam);
+
+                //data
+                str.Append("google.setOnLoadCallback(drawChart" + chartNum + ");");
+                str.Append("function drawChart" + chartNum + "() {");
+                str.Append("var data" + chartNum + " = new google.visualization.DataTable();");
+                str.Append("data" + chartNum + ".addColumn('string', 'Skill');");
+                str.Append("data" + chartNum + ".addColumn('number', 'ExpertiseLevel');");
+                str.Append("data" + chartNum + ".addColumn({type:'string', role:'annotation'});");
+
+                str.Append("data" + chartNum + @".addRows(" + dt.Rows.Count + ");");
+
+                for (var i = 0; i <= dt.Rows.Count - 1; i++)
+                {
+                    str.Append("data" + chartNum + ".setValue( " + i + "," + 0 + "," + "'" + dt.Rows[i]["Skill"] + "');");
+                    str.Append("data" + chartNum + ".setValue(" + i + "," + 1 + "," + dt.Rows[i]["ExpertiseLevel"] + ") ;");
+                    str.Append("data" + chartNum + ".setValue( " + i + "," + 2 + "," + "'" + dt.Rows[i]["ExpertiseLevel"] + "');");
+                }
+
+                //options
+                str.Append(" var chart = new google.visualization.BarChart(document.getElementById('chart_div" + chartNum + "'));");
+                //str.Append(" google.visualization.events.addListener(chart, 'ready', changeBorderRadius)); google.visualization.events.addListener(chart, 'select', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseover', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseout', changeBorderRadius); function changeBorderRadius() { chartColumns = document.getElementById('chart_div').getElementsByTagName('rect'); Array.prototype.forEach.call(chartColumns, function(column) { if ((colors.indexOf(column.getAttribute('fill')) > -1) || (column.getAttribute('fill') === 'none') || (column.getAttribute('stroke') === '#ffffff')) { column.setAttribute('rx', 20); column.setAttribute('ry', 20); } }");
+                str.Append(" chart.draw(data" + chartNum + ", {width: " + width + ", height: " + height + ", title: 'Skill Chart: ',");
+                //str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
+                str.Append("hAxis: { textPosition: 'none' },");
+                str.Append("colors: ['#73a839'],");
+                str.Append("dataOpacity: 0.8,");
+                str.Append("legend: { position: 'none' },");
+                str.Append("animation: {duration: 1500, startup: true, easing: 'out'},");
+                str.Append("vAxis: { title: 'Skill' },");
+                str.Append("}); }");
 
                 return str.ToString();
             }

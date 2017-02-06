@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Web.UI;
 
@@ -23,13 +24,45 @@ namespace FYP
         {
             if (Page.IsPostBack == false)
             {
-                var currentUserId = User.Identity.GetUserId();
-                var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                var currentUser = manager.FindById(currentUserId);
-                EmpFirstName = currentUser.FirstName;
-                EmpLastName = currentUser.LastName;
-                
-                
+                //try catch for dev purposes. Remove for final version
+                try
+                {
+                    var currentUserId = User.Identity.GetUserId();
+                    var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var currentUser = manager.FindById(currentUserId);
+                    EmpFirstName = currentUser.FirstName;
+                    EmpLastName = currentUser.LastName;
+                }
+                catch
+                {
+                    EmpFirstName = "Dylan";
+                    EmpLastName = "Fitzgerald";
+                }
+
+
+
+
+                //StringBuilder strBuild1 = new StringBuilder();
+                //var dt1 = new DataTable();
+                //dt1 = GlobalClass.GetMaxTeamData("Developers");
+                //for (var i = 0; i < dt1.Rows.Count; i++)
+                //{
+                //    strBuild1.Append(dt1.Rows[i]["Skill"]);
+                //    strBuild1.Append(dt1.Rows[i]["ExpertiseLevel"]);
+                //    strBuild1.Append("----");
+
+                //}
+
+                //StringBuilder strBuild = new StringBuilder();
+                //var dt = new DataTable();
+                //dt = GlobalClass.GetSelectedTeamData("Developers");
+                //for (var i = 0; i < dt.Rows.Count; i++)
+                //{
+                //    strBuild.Append(dt.Rows[i]["Skill"]);
+                //    strBuild.Append(dt.Rows[i]["ExpertiseLevel"]);
+                //    strBuild.Append("----");
+
+                //}
 
                 //populate seleted team dropdownlist
                 if (lstSelectedTeam.Items.Count == 0)
@@ -41,9 +74,9 @@ namespace FYP
                     selectedEmployeesTeam = GlobalClass.GetSelectedEmployeesTeam(EmpFirstName, EmpLastName);
                     lstSelectedTeam.SelectedValue = selectedEmployeesTeam;
                 }
-                
+
             }
-        
+
         }
 
         protected void btnSelectTeam_Click(object sender, EventArgs e)
@@ -64,8 +97,21 @@ namespace FYP
             script.Append(GlobalClass.GetClosingChartScript());
             script.Replace('*', '"');
             lt.Text = script.ToString();
-            //Response.Redirect("ChartForm.aspx");
         }
 
+        protected void btnTeamView_Click(object sender, EventArgs e)
+        {
+            script.Clear();
+            selectedEmployeesTeam = lstSelectedTeam.SelectedValue;
+            TeamMembers = GlobalClass.GetTeamMembers(selectedEmployeesTeam);
+
+            TeamMemberIndex = 0;
+            script.Append(GlobalClass.GetOpeningChartScript());
+            script.Append(GlobalClass.CreateTeamStrengthChart(selectedEmployeesTeam, TeamMemberIndex + 1, 1000, 600));
+            script.Append(GlobalClass.GetClosingChartScript());
+            script.Replace('*', '"');
+            lt.Text = script.ToString();
+
+        }
     }
 }

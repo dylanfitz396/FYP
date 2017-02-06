@@ -12,8 +12,12 @@
             <div class="form-group">
                 <asp:Label ID="SelectedTeam" runat="server" CssClass="col-md-3 control-label">Selected Team:</asp:Label>
                 <asp:DropDownList ID="lstSelectedTeam" runat="server" CssClass="col-md-4 form-control"></asp:DropDownList>
-                <div class="col-md-5">
-                <asp:Button ID="btnSelectTeam" CssClass="btn btn-primary btn-sm form-control" runat="server" OnClick="btnSelectTeam_Click" Text="Select Team >>"></asp:Button>
+                <div class="col-md-2">
+                <%--<asp:Label ID="Label1" runat="server" CssClass="col-sm-1 control-label"> </asp:Label>--%>
+                <asp:Button ID="btnSelectTeam" CssClass="btn btn-primary btn-sm form-control" runat="server" OnClick="btnSelectTeam_Click" Text="Team Members View >>"></asp:Button>
+                </div>
+                <div class="col-md-1">
+                <asp:Button ID="btnTeamView" CssClass="btn btn-info btn-sm form-control" runat="server" OnClick="btnTeamView_Click" Text="Team View >>"></asp:Button>
                 </div>
             </div>
 

@@ -11,11 +11,24 @@ namespace FYP
     {       
         protected void Page_Load(object sender, EventArgs e)
         {
-            var currentUserId = User.Identity.GetUserId();
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            var currentUser = manager.FindById(currentUserId);
-            string EmpFirstName = currentUser.FirstName;
-            string EmpLastName = currentUser.LastName;
+            string EmpFirstName;
+            string EmpLastName;
+
+            //try catch for dev purposes. Remove for final version
+            try
+            {
+                var currentUserId = User.Identity.GetUserId();
+                var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var currentUser = manager.FindById(currentUserId);
+                EmpFirstName = currentUser.FirstName;
+                EmpLastName = currentUser.LastName;
+            }
+            catch
+            {
+                EmpFirstName = "Dylan";
+                EmpLastName = "Fitzgerald";
+            }
+
             StringBuilder script = new StringBuilder();
             int chartWidth = 760;
             int chartHeight = 360;

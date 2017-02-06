@@ -40,6 +40,15 @@ namespace FYP {
         protected global::System.Web.UI.WebControls.Button btnSelectTeam;
         
         /// <summary>
+        /// btnTeamView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTeamView;
+        
+        /// <summary>
         /// lt control.
         /// </summary>
         /// <remarks>
