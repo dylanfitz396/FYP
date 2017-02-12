@@ -84,14 +84,33 @@ namespace FYP
             script.Clear();
             selectedEmployeesTeam = lstSelectedTeam.SelectedValue;
             TeamMembers = GlobalClass.GetTeamMembers(selectedEmployeesTeam);
+            string Colour = "#73a839";
 
             script.Append(GlobalClass.GetOpeningChartScript());
 
             for (TeamMemberIndex = 0; TeamMemberIndex < TeamMembers.Count; TeamMemberIndex++)
             {
+                switch (TeamMemberIndex)
+                {
+                    case 0:
+                        Colour = "#73a839";
+                        break;
+                    case 1:
+                        Colour = "#333399";
+                        break;
+                    case 2:
+                        Colour = "#CC9933";
+                        break;
+                    case 3:
+                        Colour = "#993366";
+                        break;
+                    default:
+                        Colour = "#73a839";
+                        break;
+                }
                 EmpFirstName = TeamMembers[TeamMemberIndex].Item1;
                 EmpLastName = TeamMembers[TeamMemberIndex].Item2;
-                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, TeamMemberIndex + 1, ChartWidth, ChartHeight));
+                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, TeamMemberIndex + 1, ChartWidth, ChartHeight, Colour));
             }
 
             script.Append(GlobalClass.GetClosingChartScript());

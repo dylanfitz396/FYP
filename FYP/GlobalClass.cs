@@ -296,7 +296,7 @@ namespace FYP
             return closingScript;
         }
 
-        public static string BindChart(string EmpFirstName, string EmpLastName, int chartNum, int width, int height)
+        public static string BindChart(string EmpFirstName, string EmpLastName, int chartNum, int width, int height, string colour)
         {
             StringBuilder str = new StringBuilder();
             var dt = new DataTable();
@@ -312,7 +312,8 @@ namespace FYP
                 str.Append("data" + chartNum + ".addColumn('string', 'Skill');");
                 str.Append("data" + chartNum + ".addColumn('number', 'ExpertiseLevel');");
                 str.Append("data" + chartNum + ".addColumn({type:'string', role:'annotation'});");
-                           
+                str.Append("data" + chartNum + ".addColumn({type:'string', role:'style'});");
+
                 str.Append("data" + chartNum + @".addRows(" + dt.Rows.Count + ");");
 
                 for (var i = 0; i <= dt.Rows.Count - 1; i++)
@@ -320,18 +321,21 @@ namespace FYP
                     str.Append("data" + chartNum + ".setValue( " + i + "," + 0 + "," + "'" + dt.Rows[i]["Skill"] + "');");
                     str.Append("data" + chartNum + ".setValue(" + i + "," + 1 + "," + dt.Rows[i]["ExpertiseLevel"] + ") ;");
                     str.Append("data" + chartNum + ".setValue( " + i + "," + 2 + "," + "'" + dt.Rows[i]["ExpertiseLevelString"] + "');");
+                    str.Append("data" + chartNum + ".setValue(" + i + "," + 3 + ",'stroke-color: #006600; stroke-opacity: 0.8; stroke-width: 2; fill-color: " + colour + "; fill-opacity: 0.8');");
                 }
 
                 //options
                 str.Append(" var chart = new google.visualization.BarChart(document.getElementById('chart_div" + chartNum + "'));");
                 //str.Append(" google.visualization.events.addListener(chart, 'ready', changeBorderRadius)); google.visualization.events.addListener(chart, 'select', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseover', changeBorderRadius); google.visualization.events.addListener(chart, 'onmouseout', changeBorderRadius); function changeBorderRadius() { chartColumns = document.getElementById('chart_div').getElementsByTagName('rect'); Array.prototype.forEach.call(chartColumns, function(column) { if ((colors.indexOf(column.getAttribute('fill')) > -1) || (column.getAttribute('fill') === 'none') || (column.getAttribute('stroke') === '#ffffff')) { column.setAttribute('rx', 20); column.setAttribute('ry', 20); } }");
-                str.Append(" chart.draw(data" + chartNum + ", {width: " + width + ", height: " + height + ", title: 'Skill Chart: " + EmpFirstName +
-                           "',");
+                str.Append(" chart.draw(data" + chartNum + ", {width: " + width + ", height: " + height + ",");
+                //title: 'Skill Chart: " + EmpFirstName + "',
                 //str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
                 str.Append("hAxis: { textPosition: 'none' },");
-                str.Append("colors: ['#73a839'],");
-                str.Append("dataOpacity: 0.8,");
+                //str.Append("colors: ['" + colour + "'],");
+                //str.Append("style: {stroke-color: '#871B47', stroke-opacity: 0.6, stroke-width: 8, fill-color: '#BC5679', fill-opacity: 0.2},");
+                //str.Append("dataOpacity: 0.8,");
                 str.Append("legend: { position: 'none' },");
+                str.Append("chartArea: {width: '70%', height: '80%'},");
                 str.Append("animation: {duration: 1500, startup: true, easing: 'out'},");
                 str.Append("vAxis: { title: 'Skill' },");
                 str.Append("}); }");

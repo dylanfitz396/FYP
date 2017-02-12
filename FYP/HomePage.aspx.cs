@@ -13,6 +13,7 @@ namespace FYP
         {
             string EmpFirstName;
             string EmpLastName;
+            string currentUserName = "dylan@gmail.com";
 
             //try catch for dev purposes. Remove for final version
             try
@@ -30,16 +31,20 @@ namespace FYP
             }
 
             StringBuilder script = new StringBuilder();
-            int chartWidth = 760;
-            int chartHeight = 360;
+            int chartWidth = 1020;
+            int chartHeight = 400; 
+            string colour = "#73a839";
 
             if (Page.IsPostBack == false)
             {
                 string teamName = GlobalClass.GetSelectedEmployeesTeam(EmpFirstName, EmpLastName);
+                currentUserName = Context.User.Identity.GetUserName();
                 lblSelectedTeam.Text = teamName;
+                lblEmpName.Text = EmpFirstName + " " + EmpLastName;
+                lblEmail.Text = currentUserName;
 
                 script.Append(GlobalClass.GetOpeningChartScript());
-                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, 1, chartWidth, chartHeight));
+                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, 1, chartWidth, chartHeight, colour));
                 script.Append(GlobalClass.GetClosingChartScript());
                 script.Replace('*', '"');
                 lt.Text = script.ToString();

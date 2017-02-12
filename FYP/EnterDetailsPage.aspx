@@ -5,11 +5,18 @@
 
     <div class="form-horizontal">
         <div class="row">
+        <div class="col-md-8">
         <h2><%: Title %>.</h2>
         <p class="text-danger">
             <asp:Literal runat="server" ID="ErrorMessage" />
         </p>
         <h4>Create a new account</h4>
+        </div>
+            <div class="col-md-4" style="margin-left: auto; margin-right: auto; text-align: right;">
+                    <asp:Image runat="server" ImageUrl="~/Images/VisualiseUsLogo.jpg" style="width:140px;height:115px;"></asp:Image>  
+            </div>
+            </div>
+
         <hr />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
 
