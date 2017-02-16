@@ -110,7 +110,7 @@ namespace FYP
                 }
                 EmpFirstName = TeamMembers[TeamMemberIndex].Item1;
                 EmpLastName = TeamMembers[TeamMemberIndex].Item2;
-                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, TeamMemberIndex + 1, ChartWidth, ChartHeight, Colour));
+                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, TeamMemberIndex + 1, ChartWidth, ChartHeight, Colour, true));
             }
 
             script.Append(GlobalClass.GetClosingChartScript());
@@ -124,9 +124,9 @@ namespace FYP
             selectedEmployeesTeam = lstSelectedTeam.SelectedValue;
             TeamMembers = GlobalClass.GetTeamMembers(selectedEmployeesTeam);
 
-            TeamMemberIndex = 0;
             script.Append(GlobalClass.GetOpeningChartScript());
-            script.Append(GlobalClass.CreateTeamStrengthChart(selectedEmployeesTeam, TeamMemberIndex + 1, 1000, 600));
+            script.Append(GlobalClass.CreateTeamStrengthChart(EmpFirstName, selectedEmployeesTeam, 1, ChartWidth, ChartHeight, true, "#73a839"));
+            script.Append(GlobalClass.CreateTeamStrengthChart(EmpFirstName, selectedEmployeesTeam, 2, ChartWidth, ChartHeight, false, "#FF0000"));
             script.Append(GlobalClass.GetClosingChartScript());
             script.Replace('*', '"');
             lt.Text = script.ToString();

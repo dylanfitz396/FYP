@@ -171,11 +171,6 @@
             <asp:Button class="btn btn-danger" ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete Skill" />
         </p>
         </div>       
-        <div class="col-md-1">
-        <p>
-            <asp:Button class="btn btn-success btn-lg" ID="btnHome" runat="server" OnClick="btnHome_Click" Text="Home" />
-        </p>
-        </div>
             </div>
         </div>
         </div>

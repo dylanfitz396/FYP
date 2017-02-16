@@ -178,7 +178,7 @@ namespace FYP
                 }
                 else
                 {
-                    btnHome.Focus();
+                    txtSkill.Focus();
                 }
                 
             }
@@ -259,12 +259,6 @@ namespace FYP
             GlobalClass.DeleteDataRowInSkillsDb(EmpFirstName, txtSkill.Text, EmpLastName);
             Response.Redirect(Request.RawUrl);
         }
-
-        protected void btnHome_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/HomePage.aspx");
-        }
-
         
     }
 }

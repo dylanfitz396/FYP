@@ -44,7 +44,7 @@ namespace FYP
                 lblEmail.Text = currentUserName;
 
                 script.Append(GlobalClass.GetOpeningChartScript());
-                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, 1, chartWidth, chartHeight, colour));
+                script.Append(GlobalClass.BindChart(EmpFirstName, EmpLastName, 1, chartWidth, chartHeight, colour, false));
                 script.Append(GlobalClass.GetClosingChartScript());
                 script.Replace('*', '"');
                 lt.Text = script.ToString();
