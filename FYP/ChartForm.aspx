@@ -79,9 +79,21 @@
                     <div id="chart_div10"></div>
                 </div> 
                 </div>
-            </div>
-        </div>
+
+                <div class="col-md-9">
+                    <div class="form-group">
+                    <table class="table table-striped table-bordered table-hover">
+                        <asp:PlaceHolder ID = "MissingSkillsTablePlaceholder" runat="server" />
+                    </table>
+                    </div> 
+                </div>
 
             </div>
+
+            </div>
+
+            
+
+        </div>
 
 </asp:Content>

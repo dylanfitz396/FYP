@@ -170,6 +170,31 @@ namespace FYP
             return lstSkills;
         }
 
+        public static List<string> GetSelectedTeamSkills(string selectedTeam)
+        {
+            var lstSkills = new List<string>();
+
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                //The SQL you want to execute
+                var cmd = new SqlCommand(
+                            "Select Distinct Skill from Skills where SelectedTeam = '" + selectedTeam + "'",
+                            myCon);
+                //Open the connection to the database
+                myCon.Open();
+                //execute your command
+                using (IDataReader dataReader = cmd.ExecuteReader())
+                {
+                    //Loop through your results
+                    while (dataReader.Read())
+                    {
+                        lstSkills.Add(Convert.ToString(dataReader["Skill"]).ToUpper());
+                    }
+                }
+            }
+            return lstSkills;
+        }
+
         public static List<Tuple<string, string>> GetTeamMembers(string TeamName)
         {
             //List<string> lstFirstName = new List<string>();
@@ -368,6 +393,8 @@ namespace FYP
         {
             StringBuilder str = new StringBuilder();
             var dt = new DataTable();
+            var ExpertiseLevelString = "";
+            var chartTitle = "";
             
             try
             {
@@ -375,10 +402,12 @@ namespace FYP
                 if (isStrongTeam == true)
                 {
                     dt = GetSkillsTeamData(selectedTeam, ">= 3");
+                    chartTitle = "Skill Chart: " + selectedTeam + " (Strong Skills)";
                 }
                 else
                 {
                     dt = GetSkillsTeamData(selectedTeam, "< 3");
+                    chartTitle = "Skill Chart: " + selectedTeam + " (Weak Skills)";
                 }
                 
 
@@ -395,16 +424,38 @@ namespace FYP
 
                 for (var i = 0; i <= dt.Rows.Count - 1; i++)
                 {
+                    int expertiseLevelInt = int.Parse(dt.Rows[i]["ExpertiseLevel"].ToString());
+                    switch (expertiseLevelInt)
+                    {
+                        case 1:
+                            ExpertiseLevelString = "Beginner";
+                            break;
+                        case 2:
+                            ExpertiseLevelString = "Intermediate";
+                            break;
+                        case 3:
+                            ExpertiseLevelString = "Proficient";
+                            break;
+                        case 4:
+                            ExpertiseLevelString = "Advanced";
+                            break;
+                        case 5:
+                            ExpertiseLevelString = "SME";
+                            break;
+                        default:
+                            ExpertiseLevelString = "Beginner";
+                            break;
+                    }
                     str.Append("data" + chartNum + ".setValue( " + i + "," + 0 + "," + "'" + dt.Rows[i]["Skill"] + "');");
                     str.Append("data" + chartNum + ".setValue(" + i + "," + 1 + "," + dt.Rows[i]["ExpertiseLevel"] + ") ;");
-                    str.Append("data" + chartNum + ".setValue( " + i + "," + 2 + "," + "'" + dt.Rows[i]["ExpertiseLevel"] + "');");
+                    str.Append("data" + chartNum + ".setValue( " + i + "," + 2 + "," + "'" + ExpertiseLevelString + "');");
                     str.Append("data" + chartNum + ".setValue(" + i + "," + 3 + ",'stroke-color: #006600; stroke-opacity: 0.8; stroke-width: 2; fill-color: " + colour + "; fill-opacity: 0.8');");
                 }
 
                 //options
                 str.Append(" var chart = new google.visualization.BarChart(document.getElementById('chart_div" + chartNum + "'));");
                 str.Append(" chart.draw(data" + chartNum + ", {width: " + width + ", height: " + height + ",");
-                str.Append("title: 'Skill Chart: " + selectedTeam + "',");
+                str.Append("title: '" + chartTitle + "',");
                 //str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
                 str.Append("hAxis: { textPosition: 'none', maxValue: 4, minValue: 0 },");
                 //str.Append("colors: ['#73a839'],");

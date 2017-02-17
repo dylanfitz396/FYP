@@ -2,10 +2,13 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace FYP
 {
@@ -130,6 +133,61 @@ namespace FYP
             script.Append(GlobalClass.GetClosingChartScript());
             script.Replace('*', '"');
             lt.Text = script.ToString();
+
+            var lstAllSkills = GlobalClass.GetAllSkills();
+            var lstTeamSkills = GlobalClass.GetSelectedTeamSkills(selectedEmployeesTeam);
+            var lstMissingSkills = lstAllSkills.Except(lstTeamSkills).ToList();
+            var divisibleBy3Int = 0;
+
+            //Building an HTML string.
+            var html = new StringBuilder();
+
+            //Table start.
+            //Building the Header row.
+            html.Append("<thead class=*bg-success*>");
+            html.Append("<tr class=*table-success*>");
+                html.Append("<th class=*table-success*>");
+                html.Append("Missing Skills");
+                html.Append("</th>");
+                html.Append("<th class=*table-success*>");
+                html.Append("");
+                html.Append("</th>");
+                html.Append("<th class=*table-success*>");
+                html.Append("");
+                html.Append("</th>");
+            html.Append("</tr>");
+            html.Append("</thead>");
+
+            html.Append("<tr class=*table-success*>");
+
+            foreach (var Skill in lstMissingSkills)
+            {
+                divisibleBy3Int++;
+
+                html.Append("<td class=*table-success*>");
+                html.Append(Skill.ToString());
+                html.Append("</td>");
+                
+                while (divisibleBy3Int >= 0)
+                {
+                    divisibleBy3Int -= 3;
+                }
+                while (divisibleBy3Int < 0)
+                {
+                    divisibleBy3Int += 3;
+                }
+                if (divisibleBy3Int == 0)
+                {
+                    html.Append("</tr>");
+                    html.Append("<tr class=*table-success*>");
+                }
+            }
+
+            html.Append("</tr>");
+            html.Replace('*', '"');
+
+            //Append the HTML string to Placeholder.
+            MissingSkillsTablePlaceholder.Controls.Add(new Literal { Text = html.ToString() });
 
         }
     }
