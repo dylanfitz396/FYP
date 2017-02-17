@@ -347,7 +347,7 @@ namespace FYP
                     str.Append("title: 'Skill Chart: " + EmpFirstName + "',");
                 }
                 //str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
-                str.Append("hAxis: { textPosition: 'none' },");
+                str.Append("hAxis: { textPosition: 'none', maxValue: 4, minValue: 0 },");
                 //str.Append("dataOpacity: 0.8,");
                 str.Append("legend: { position: 'none' },");
                 str.Append("chartArea: {width: '70%', height: '80%'},");
@@ -406,7 +406,7 @@ namespace FYP
                 str.Append(" chart.draw(data" + chartNum + ", {width: " + width + ", height: " + height + ",");
                 str.Append("title: 'Skill Chart: " + selectedTeam + "',");
                 //str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
-                str.Append("hAxis: { textPosition: 'none' },");
+                str.Append("hAxis: { textPosition: 'none', maxValue: 4, minValue: 0 },");
                 //str.Append("colors: ['#73a839'],");
                 //str.Append("dataOpacity: 0.8,");
                 str.Append("legend: { position: 'none' },");

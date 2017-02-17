@@ -11,7 +11,7 @@
                 <h4>View the Skills Charts of employees from different teams!</h4>
             </div>
             <div class="col-md-4" style="margin-left: auto; margin-right: auto; text-align: right;">
-                    <asp:Image runat="server" ImageUrl="~/Images/VisualiseUsLogo.jpg" style="width:140px;height:115px;"></asp:Image>  
+                    <asp:Image runat="server" ImageUrl="~/Images/SkillsHubLogoSmall.jpg" style="width:260px;height:95px;"></asp:Image>  
             </div>
             </div>
                 <hr />
