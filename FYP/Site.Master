@@ -51,11 +51,11 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/HomePage">SkillsHUB</a></li>
-                        <li><a runat="server" href="~/HomePage">Home</a></li>
+                        <li><a runat="server" href="~/HomePage">SkillsHUB Home</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/ChartForm">Teams Charts</a></li>
                         <li><a runat="server" href="~/InputPage">Input Page</a></li>
+                        <li><a runat="server" href="~/ChartForm">Teams Charts</a></li>
+                        <li><a runat="server" href="~/InputPage">Search Page</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">

@@ -70,9 +70,11 @@ namespace FYP
                 //populate seleted team dropdownlist
                 if (lstSelectedTeam.Items.Count == 0)
                 {
-                    lstSelectedTeam.Items.Add("Developers");
-                    lstSelectedTeam.Items.Add("Analysts");
-                    lstSelectedTeam.Items.Add("QA");
+                    var lstTeams = GlobalClass.GetAllTeams();
+                    for (var i = 0; i < lstTeams.Count; i++)
+                    {
+                        lstSelectedTeam.Items.Add(lstTeams[i].ToString());
+                    }
 
                     selectedEmployeesTeam = GlobalClass.GetSelectedEmployeesTeam(EmpFirstName, EmpLastName);
                     lstSelectedTeam.SelectedValue = selectedEmployeesTeam;

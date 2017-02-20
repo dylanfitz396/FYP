@@ -92,6 +92,30 @@ namespace FYP
             }
         }
 
+        public static DataTable GetSelectedSkillsData(string selectedSkill)
+        {
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                var dt = new DataTable();
+                var cmd = "select Skill, EmpName, EmpLastName, ExpertiseLevel, ExpertiseLevelString from Skills where Skill = '" + selectedSkill + "'";
+                var adp = new SqlDataAdapter(cmd, myCon);
+                adp.Fill(dt);
+                return dt;
+            }
+        }
+
+        public static DataTable GetAllEmployeesDataTable()
+        {
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                var dt = new DataTable();
+                var cmd = "select Distinct EmpName, EmpLastName from Skills";
+                var adp = new SqlDataAdapter(cmd, myCon);
+                adp.Fill(dt);
+                return dt;
+            }
+        }
+
         public static string GetSelectedEmployeesTeam(string EmpFirstName, string EmpLastName)
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
@@ -168,6 +192,31 @@ namespace FYP
                 }
             }
             return lstSkills;
+        }
+
+        public static List<string> GetAllTeams()
+        {
+            var lstTeams = new List<string>();
+
+            using (SqlConnection myCon = new SqlConnection(connStr))
+            {
+                //The SQL you want to execute
+                var cmd = new SqlCommand(
+                            "Select Distinct SelectedTeam from Skills",
+                            myCon);
+                //Open the connection to the database
+                myCon.Open();
+                //execute your command
+                using (IDataReader dataReader = cmd.ExecuteReader())
+                {
+                    //Loop through your results
+                    while (dataReader.Read())
+                    {
+                        lstTeams.Add(Convert.ToString(dataReader["SelectedTeam"]).ToUpper());
+                    }
+                }
+            }
+            return lstTeams;
         }
 
         public static List<string> GetSelectedTeamSkills(string selectedTeam)
@@ -465,6 +514,60 @@ namespace FYP
                 str.Append("animation: {duration: 1500, startup: true, easing: 'out'},");
                 str.Append("vAxis: { title: 'Skill' },");
                 str.Append("}); }");
+
+                return str.ToString();
+            }
+            catch
+            {
+                return str.ToString();
+            }
+        }
+
+
+        public static string CreateSkillSpecificChart(string selectedSkill, int chartNum, int width, int height, string colour, bool IncludeTitle)
+        {
+            StringBuilder str = new StringBuilder();
+            var dt = new DataTable();
+            try
+            {
+                //dt = GetSelectedEmployeeData(EmpFirstName, EmpLastName);
+                dt = GetSelectedSkillsData(selectedSkill);
+
+                //data
+                str.Append("google.setOnLoadCallback(drawChart" + chartNum + ");");
+                str.Append("function drawChart" + chartNum + "() {");
+                str.Append("var data" + chartNum + " = new google.visualization.DataTable();");
+                str.Append("data" + chartNum + ".addColumn('string', 'EmpName');");
+                str.Append("data" + chartNum + ".addColumn('number', 'ExpertiseLevel');");
+                str.Append("data" + chartNum + ".addColumn({type:'string', role:'annotation'});");
+                str.Append("data" + chartNum + ".addColumn({type:'string', role:'style'});");
+
+                str.Append("data" + chartNum + @".addRows(" + dt.Rows.Count + ");");
+
+                for (var i = 0; i <= dt.Rows.Count - 1; i++)
+                {
+                    str.Append("data" + chartNum + ".setValue( " + i + "," + 0 + "," + "'" + dt.Rows[i]["EmpName"] + " " + dt.Rows[i]["EmpLastName"] + "');");
+                    str.Append("data" + chartNum + ".setValue(" + i + "," + 1 + "," + dt.Rows[i]["ExpertiseLevel"] + ") ;");
+                    str.Append("data" + chartNum + ".setValue( " + i + "," + 2 + "," + "'" + dt.Rows[i]["ExpertiseLevelString"] + "');");
+                    str.Append("data" + chartNum + ".setValue(" + i + "," + 3 + ",'stroke-color: #006600; stroke-opacity: 0.8; stroke-width: 2; fill-color: " + colour + "; fill-opacity: 0.8');");
+                }
+
+                //options
+                str.Append(" var chart = new google.visualization.BarChart(document.getElementById('chart_div" + chartNum + "'));");
+                str.Append(" chart.draw(data" + chartNum + ", {width: " + width + ", height: " + height + ",");
+                if (IncludeTitle == true)
+                {
+                    str.Append("title: 'Skill Chart: " + selectedSkill + "',");
+                }
+                //str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
+                str.Append("hAxis: { textPosition: 'none', maxValue: 4, minValue: 0 },");
+                //str.Append("dataOpacity: 0.8,");
+                str.Append("legend: { position: 'none' },");
+                str.Append("chartArea: {width: '70%', height: '80%'},");
+                str.Append("animation: {duration: 1500, startup: true, easing: 'out'},");
+                str.Append("vAxis: { title: 'Employee Name' },");
+                str.Append("}); }");
+
 
                 return str.ToString();
             }
