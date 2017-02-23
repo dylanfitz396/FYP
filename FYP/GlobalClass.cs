@@ -165,6 +165,7 @@ namespace FYP
                         lstSkills.Add(Convert.ToString(dataReader["Skill"]).ToUpper());
                     }
                 }
+                myCon.Close();
             }
             return lstSkills;
         }
@@ -190,6 +191,7 @@ namespace FYP
                         lstSkills.Add(Convert.ToString(dataReader["Skill"]).ToUpper());
                     }
                 }
+                myCon.Close();
             }
             return lstSkills;
         }
@@ -215,6 +217,7 @@ namespace FYP
                         lstTeams.Add(Convert.ToString(dataReader["SelectedTeam"]).ToUpper());
                     }
                 }
+                myCon.Close();
             }
             return lstTeams;
         }
@@ -240,6 +243,7 @@ namespace FYP
                         lstSkills.Add(Convert.ToString(dataReader["Skill"]).ToUpper());
                     }
                 }
+                myCon.Close();
             }
             return lstSkills;
         }
@@ -266,6 +270,7 @@ namespace FYP
                         lst.Add(new Tuple<string, string>((Convert.ToString(dataReader["EmpName"])), (Convert.ToString(dataReader["EmpLastName"]))));
                     }
                 }
+                myCon.Close();
             }   
             return lst;
         }

@@ -31,19 +31,23 @@ namespace FYP
             lstSelectTeam.Items.Add("Analysts");
             lstSelectTeam.Items.Add("QA");
 
-            //populate the dropdownlist for expertise level
-            for (DropDownListIndex = 1; DropDownListIndex < 4; DropDownListIndex++)
+            if (IsPostBack == false)
             {
-                string controlNamelstExpertiseLevel = "lstExpertiseLevel" + DropDownListIndex.ToString();
-                var controllstExpertiseLevel = container.FindControl(controlNamelstExpertiseLevel);
-                DropDownList lstExpertiseLevel = (DropDownList)controllstExpertiseLevel;
-                lstExpertiseLevel.Visible = true;
 
-                lstExpertiseLevel.Items.Add("Beginner");
-                lstExpertiseLevel.Items.Add("Intermediate");
-                lstExpertiseLevel.Items.Add("Proficient");
-                lstExpertiseLevel.Items.Add("Advanced");
-                lstExpertiseLevel.Items.Add("SME");
+                //populate the dropdownlist for expertise level
+                for (DropDownListIndex = 1; DropDownListIndex < 4; DropDownListIndex++)
+                {
+                    string controlNamelstExpertiseLevel = "lstExpertiseLevel" + DropDownListIndex.ToString();
+                    var controllstExpertiseLevel = container.FindControl(controlNamelstExpertiseLevel);
+                    DropDownList lstExpertiseLevel = (DropDownList)controllstExpertiseLevel;
+                    lstExpertiseLevel.Visible = true;
+
+                    lstExpertiseLevel.Items.Add("Beginner");
+                    lstExpertiseLevel.Items.Add("Intermediate");
+                    lstExpertiseLevel.Items.Add("Proficient");
+                    lstExpertiseLevel.Items.Add("Advanced");
+                    lstExpertiseLevel.Items.Add("SME");
+                }
             }
         }
 

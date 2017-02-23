@@ -1,23 +1,25 @@
 ﻿<%@ Page Title="Enter Your Details" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EnterDetailsPage.aspx.cs" Inherits="FYP.EnterDetailsPage" %>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <div class="jumbotron">
-    
 
-    <div class="form-horizontal">
+    <div class="jumbotron">
+
         <div class="row">
         <div class="col-md-8">
-        <h2><%: Title %>.</h2>
-        <p class="text-danger">
-            <asp:Literal runat="server" ID="ErrorMessage" />
-        </p>
-        <h4>Create a new account</h4>
-        </div>
-            <div class="col-md-4" style="margin-left: auto; margin-right: auto; text-align: right;">
-                    <asp:Image runat="server" ImageUrl="~/Images/VisualiseUsLogo.jpg" style="width:140px;height:115px;"></asp:Image>  
-            </div>
-            </div>
+        <h1>Enter Your Details</h1> 
+                    <h4>Create a new account</h4> 
 
+        <div class="text-danger">
+            <asp:Literal runat="server" ID="ErrorMessage" />
+        </div>
+            </div>
+            <div class="col-md-4" style="margin-left: auto; margin-right: auto; text-align: right;">
+                    <asp:Image runat="server" ImageUrl="~/Images/SkillsHubLogoSmall.jpg" style="width:260px;height:95px;"></asp:Image>  
+            </div>
+            <p>
+                &nbsp
+            </p>
         <hr />
+             
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
 
         <div class="form-group">
@@ -133,10 +135,8 @@
 
         </div>
         
-        
+       </div> 
     </div>
     </div>
-        </div>
-
 
 </asp:Content>

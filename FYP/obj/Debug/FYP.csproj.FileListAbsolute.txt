@@ -82,3 +82,4 @@ C:\Git\FYP\FYP\FYP\obj\Debug\FYP.csproj.GenerateResource.Cache
 C:\Git\FYP\FYP\FYP\obj\Debug\FYP.dll
 C:\Git\FYP\FYP\FYP\obj\Debug\FYP.pdb
 C:\Git\FYP\FYP\FYP\bin\AjaxControlToolkit.dll
+C:\Git\FYP\FYP\FYP\obj\Debug\FYP.csprojResolveAssemblyReference.cache
