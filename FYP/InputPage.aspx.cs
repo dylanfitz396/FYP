@@ -30,6 +30,7 @@ namespace FYP
             btnUpdate.Visible = false;
             btnInsert.Visible = false;
             btnDelete.Visible = false;
+            btnChangeTeam.Visible = true;
             lblExpertiseLevel.Visible = false;
             lstExpertiseLevel.Visible = false;
             lstSelectedTeam.Enabled = false;
@@ -157,6 +158,7 @@ namespace FYP
                 {
                     GlobalClass.UpdateSelectedTeamInSkillsDb(EmpFirstName, EmpLastName, lstSelectedTeam.SelectedValue);
                     teamName = lstSelectedTeam.SelectedValue;
+                    Response.Redirect(Request.RawUrl);
                 }
 
             

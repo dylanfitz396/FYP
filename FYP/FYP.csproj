@@ -226,7 +226,9 @@
     <Content Include="SearchPage.aspx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
-    <None Include="Properties\PublishProfiles\skillshub - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\skillshub - Web Deploy.pubxml">
+      <BrowseToURL>skillshub.azurewebsites.net/HomePage</BrowseToURL>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
