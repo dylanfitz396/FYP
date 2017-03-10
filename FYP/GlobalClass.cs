@@ -1,26 +1,23 @@
-﻿using FYP.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
-using System.Web.Providers.Entities;
-using Microsoft.AspNet.Identity;
 using System.Web.UI;
 using System.Collections.Generic;
 using System;
 
 namespace FYP
 {
+    //global class containing methods that can be accessed from all other classes
     public partial class GlobalClass : Page
     {
         //Get connection string from web.config
-        //public static SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[
-        //    "Database1ConnectionString1"].ConnectionString);
         private static string connStr = ConfigurationManager.ConnectionStrings[
             "Database1ConnectionString1"].ConnectionString;
 
 
+        //Get employee data when have their first and last name
         public static DataTable GetSelectedEmployeeData(string EmpFirstName, string EmpLastName)
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
@@ -33,20 +30,7 @@ namespace FYP
             }
         }
 
-        public static DataTable GetMaxTeamData(string selectedTeam)
-        {
-            using (SqlConnection myCon = new SqlConnection(connStr))
-            {
-                var dt = new DataTable();
-                var cmd = "SELECT Skill, MAX(ExpertiseLevel) ExpertiseLevel FROM Skills where SelectedTeam = '" + selectedTeam + "' GROUP BY Skill";
-                //var cmd = "select Skill, EmpName, EmpLastName, MAX(ExpertiseLevel) as MaxExpertiseLevel from Skills " + 
-                //        "where SelectedTeam = '" + selectedTeam + "' group by Skill";
-                var adp = new SqlDataAdapter(cmd, myCon);
-                adp.Fill(dt);
-                return dt;
-            }
-        }
-
+        //get maximum expertise level for each skill on team
         public static DataTable GetSkillsTeamData(string selectedTeam, string expertiseLevel)
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
@@ -54,32 +38,13 @@ namespace FYP
                 var dt = new DataTable();
                 var cmd = "SELECT Skill, MAX(ExpertiseLevel) ExpertiseLevel FROM Skills where SelectedTeam = '" + selectedTeam + 
                     "' and ExpertiseLevel " + expertiseLevel + " GROUP BY Skill";
-                //var cmd = "select Skill, EmpName, EmpLastName, MAX(ExpertiseLevel) as MaxExpertiseLevel from Skills " + 
-                //        "where SelectedTeam = '" + selectedTeam + "' group by Skill";
                 var adp = new SqlDataAdapter(cmd, myCon);
                 adp.Fill(dt);
                 return dt;
             }
         }
 
-
-
-        public static DataTable GetSelectedTeamData(string selectedTeam)
-        {
-            using (SqlConnection myCon = new SqlConnection(connStr))
-            {
-                var dt = new DataTable();
-                var cmd = "SELECT a.Skill, MIN(a.EmpName), MIN(a.EmpLastName), MIN(a.ExpertiseLevel) FROM Skills a " +
-                            "INNER JOIN(SELECT Skill, MAX(ExpertiseLevel) ExpertiseLevel FROM Skills where SelectedTeam = '" + selectedTeam + "' GROUP BY Skill" +
-                            ") b ON a.Skill = b.Skill AND a.ExpertiseLevel = b.ExpertiseLevel Group By a.Skill";
-                //var cmd = "select Skill, EmpName, EmpLastName, MAX(ExpertiseLevel) as MaxExpertiseLevel from Skills " + 
-                //        "where SelectedTeam = '" + selectedTeam + "' group by Skill";
-                var adp = new SqlDataAdapter(cmd, myCon);
-                adp.Fill(dt);
-                return dt;
-            }
-        }
-
+        //returns all skills and accompanying expertise levels from skills table
         public static DataTable GetSkillsData()
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
@@ -92,6 +57,7 @@ namespace FYP
             }
         }
 
+        //Get all data from a selected skill
         public static DataTable GetSelectedSkillsData(string selectedSkill)
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
@@ -104,6 +70,7 @@ namespace FYP
             }
         }
 
+        //returns first name, last name of each employee
         public static DataTable GetAllEmployeesDataTable()
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
@@ -116,6 +83,7 @@ namespace FYP
             }
         }
 
+        //returns employees selected team
         public static string GetSelectedEmployeesTeam(string EmpFirstName, string EmpLastName)
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
@@ -130,6 +98,7 @@ namespace FYP
             }
         }
 
+        //Returns expertise level when enter name and skill
         public static int GetExpertiseLevel(string EmpFirstName, string EmpLastName, string Skill)
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
@@ -144,6 +113,7 @@ namespace FYP
             }
         }
 
+        //Returns list of all distinct skills of an employee
         public static List<string> GetSelectedEmployeesSkills(string EmpFirstName, string EmpLastName)
         {
             var lstSkills = new List<string>();
@@ -170,6 +140,7 @@ namespace FYP
             return lstSkills;
         }
 
+        //returns all distinct skills in list format
         public static List<string> GetAllSkills()
         {
             var lstSkills = new List<string>();
@@ -196,6 +167,7 @@ namespace FYP
             return lstSkills;
         }
 
+        //returns a list of all the distinct teams
         public static List<string> GetAllTeams()
         {
             var lstTeams = new List<string>();
@@ -222,6 +194,7 @@ namespace FYP
             return lstTeams;
         }
 
+        //returns all distinct skills from selected team in list
         public static List<string> GetSelectedTeamSkills(string selectedTeam)
         {
             var lstSkills = new List<string>();
@@ -248,6 +221,7 @@ namespace FYP
             return lstSkills;
         }
 
+        //returns two column list of employee names (first, last)
         public static List<Tuple<string, string>> GetTeamMembers(string TeamName)
         {
             //List<string> lstFirstName = new List<string>();
@@ -275,6 +249,7 @@ namespace FYP
             return lst;
         }
 
+        //method to update employee's selected team in database
         public static void UpdateSelectedTeamInSkillsDb(string EmpFirstName, string EmpLastName, string SelectedTeam)
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
@@ -336,15 +311,12 @@ namespace FYP
         {
             using (SqlConnection myCon = new SqlConnection(connStr))
             {
-                //var dt = new DataTable();
-                //dt = GetSkillsData();
                 int newId = GetLastRowIdFromSkills() + 1;
                 {
                     var xp =
                         new SqlCommand(
                             "Insert into Skills(Id, EmpName, Skill, ExpertiseLevel, EmpLastName, ExpertiseLevelString, SelectedTeam) Values(@Id, @EmpName, @Skill, @ExpertiseLevel, @EmpLastName, @ExpertiseLevelString, @SelectedTeam)",
                             myCon);
-                    //var newId = (dt.Rows.Count + 1).ToString();
                     xp.Parameters.AddWithValue("@Id", newId);
                     xp.Parameters.AddWithValue("@EmpName", EmpFirstName);
                     xp.Parameters.AddWithValue("@Skill", Skill);
@@ -425,9 +397,7 @@ namespace FYP
                 {
                     str.Append("title: 'Skill Chart: " + EmpFirstName + "',");
                 }
-                //str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
                 str.Append("hAxis: { textPosition: 'none', maxValue: 4, minValue: 0 },");
-                //str.Append("dataOpacity: 0.8,");
                 str.Append("legend: { position: 'none' },");
                 str.Append("chartArea: {width: '70%', height: '80%'},");
                 str.Append("animation: {duration: 1500, startup: true, easing: 'out'},");
@@ -452,7 +422,6 @@ namespace FYP
             
             try
             {
-                //dt = GetMaxTeamData(selectedTeam);
                 if (isStrongTeam == true)
                 {
                     dt = GetSkillsTeamData(selectedTeam, ">= 3");
@@ -510,10 +479,7 @@ namespace FYP
                 str.Append(" var chart = new google.visualization.BarChart(document.getElementById('chart_div" + chartNum + "'));");
                 str.Append(" chart.draw(data" + chartNum + ", {width: " + width + ", height: " + height + ",");
                 str.Append("title: '" + chartTitle + "',");
-                //str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
                 str.Append("hAxis: { textPosition: 'none', maxValue: 4, minValue: 0 },");
-                //str.Append("colors: ['#73a839'],");
-                //str.Append("dataOpacity: 0.8,");
                 str.Append("legend: { position: 'none' },");
                 str.Append("chartArea: {width: '70%', height: '80%'},");
                 str.Append("animation: {duration: 1500, startup: true, easing: 'out'},");
@@ -535,7 +501,6 @@ namespace FYP
             var dt = new DataTable();
             try
             {
-                //dt = GetSelectedEmployeeData(EmpFirstName, EmpLastName);
                 dt = GetSelectedSkillsData(selectedSkill);
 
                 //data
@@ -564,9 +529,7 @@ namespace FYP
                 {
                     str.Append("title: 'Skill Chart: " + selectedSkill + "',");
                 }
-                //str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'black'}},");
                 str.Append("hAxis: { textPosition: 'none', maxValue: 4, minValue: 0 },");
-                //str.Append("dataOpacity: 0.8,");
                 str.Append("legend: { position: 'none' },");
                 str.Append("chartArea: {width: '70%', height: '80%'},");
                 str.Append("animation: {duration: 1500, startup: true, easing: 'out'},");

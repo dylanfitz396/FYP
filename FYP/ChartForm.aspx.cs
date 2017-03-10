@@ -27,7 +27,7 @@ namespace FYP
         {
             if (Page.IsPostBack == false)
             {
-                //try catch for dev purposes. Remove for final version
+                //try catch. if no employee is selected default to dylan fitzgerald
                 try
                 {
                     var currentUserId = User.Identity.GetUserId();
@@ -42,30 +42,6 @@ namespace FYP
                     EmpLastName = "Fitzgerald";
                 }
 
-
-
-
-                //StringBuilder strBuild1 = new StringBuilder();
-                //var dt1 = new DataTable();
-                //dt1 = GlobalClass.GetMaxTeamData("Developers");
-                //for (var i = 0; i < dt1.Rows.Count; i++)
-                //{
-                //    strBuild1.Append(dt1.Rows[i]["Skill"]);
-                //    strBuild1.Append(dt1.Rows[i]["ExpertiseLevel"]);
-                //    strBuild1.Append("----");
-
-                //}
-
-                //StringBuilder strBuild = new StringBuilder();
-                //var dt = new DataTable();
-                //dt = GlobalClass.GetSelectedTeamData("Developers");
-                //for (var i = 0; i < dt.Rows.Count; i++)
-                //{
-                //    strBuild.Append(dt.Rows[i]["Skill"]);
-                //    strBuild.Append(dt.Rows[i]["ExpertiseLevel"]);
-                //    strBuild.Append("----");
-
-                //}
 
                 //populate seleted team dropdownlist
                 if (lstSelectedTeam.Items.Count == 0)
@@ -84,6 +60,7 @@ namespace FYP
 
         }
 
+        //change displayed charts depending on selected team
         protected void btnSelectTeam_Click(object sender, EventArgs e)
         {
             script.Clear();
@@ -93,6 +70,7 @@ namespace FYP
 
             script.Append(GlobalClass.GetOpeningChartScript());
 
+            //different colour charts for different employees
             for (TeamMemberIndex = 0; TeamMemberIndex < TeamMembers.Count; TeamMemberIndex++)
             {
                 switch (TeamMemberIndex)
@@ -123,6 +101,7 @@ namespace FYP
             lt.Text = script.ToString();
         }
 
+        //display team view of overall team strong and weak skills as well as missing skills
         protected void btnTeamView_Click(object sender, EventArgs e)
         {
             script.Clear();
@@ -162,6 +141,7 @@ namespace FYP
 
             html.Append("<tr class=*table-success*>");
 
+            //adding missing skills to missing skills table
             foreach (var Skill in lstMissingSkills)
             {
                 divisibleBy3Int++;

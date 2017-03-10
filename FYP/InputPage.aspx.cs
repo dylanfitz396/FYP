@@ -5,11 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Web.Script.Services;
-using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -35,7 +31,7 @@ namespace FYP
             lstExpertiseLevel.Visible = false;
             lstSelectedTeam.Enabled = false;
 
-            //using try catch for dev purposes to make sure employee is selected for tests
+            //using try catch to make sure employee is selected for tests
             try
             {
                 var currentUserId = User.Identity.GetUserId();
@@ -105,30 +101,6 @@ namespace FYP
             PlaceHolder1.Controls.Add(new Literal {Text = html.ToString()});
             
         }
-
-        //[System.Web.Script.Services.ScriptMethod()]
-        //[System.Web.Services.WebMethod]
-        //public List<string> SearchSkills(string prefixText, int count)
-        //{
-        //    using (SqlConnection myCon = new SqlConnection(connStr))
-        //    {
-        //            var cmd = new SqlCommand(
-        //                            "Select Distinct Skill from Skills where Skill like @SearchText+'%'",
-        //                            myCon);
-        //            cmd.Parameters.AddWithValue("@SearchText", prefixText);
-        //            myCon.Open();
-        //            List<string> skills = new List<string>();
-        //            using (SqlDataReader sdr = cmd.ExecuteReader())
-        //            {
-        //                while (sdr.Read())
-        //                {
-        //                    skills.Add(sdr["Skill"].ToString());
-        //                }
-        //            }
-        //            myCon.Close();
-        //            return skills;
-        //    }
-        //}
 
         protected void btnChangeTeam_Click(object sender, EventArgs e)
         {

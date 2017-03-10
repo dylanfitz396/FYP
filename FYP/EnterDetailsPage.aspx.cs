@@ -51,7 +51,7 @@ namespace FYP
             }
         }
 
-
+        //adding appropriate text boxes and labels to allow user to add new skill
         protected void AddSkill_Click(object sender, EventArgs e)
         {
             newRowIndex++;
@@ -91,6 +91,7 @@ namespace FYP
 
         }
 
+        //read entered values and enters them into database
         protected void CreateUser_Click(object sender, EventArgs e)
         {
             var currentUserId = User.Identity.GetUserId();

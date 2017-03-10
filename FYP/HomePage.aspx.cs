@@ -15,7 +15,7 @@ namespace FYP
             string EmpLastName;
             string currentUserName = "dylan@gmail.com";
 
-            //try catch for dev purposes. Remove for final version
+            //try catch. If no employee logged in default to dylan fitzgerald
             try
             {
                 var currentUserId = User.Identity.GetUserId();

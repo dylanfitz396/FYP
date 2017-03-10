@@ -26,43 +26,6 @@
 <div id="dialog" style="display: none">
 </div>
 
-<%--    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server"></asp:ScriptManagerProxy>
-    <asp:TextBox ID="txtSkillsSearch" runat="server"></asp:TextBox>
-    <cc1:AutoCompleteExtender ServiceMethod="SearchSkills"
-        MinimumPrefixLength="1"
-        CompletionInterval="100" EnableCaching="false" CompletionSetCount="10"
-        TargetControlID="txtSkillsSearch"
-        ID="AutoCompleteExtender1" runat="server" FirstRowSelected = "false">
-    </cc1:AutoCompleteExtender>--%>
-
-
-    <%--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">--%>
-    <%--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>--%>
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    
-    <script lang="javascript" type="text/javascript">
-        $(function () {
-            $('#<%=txtSkill.ClientID%>').autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "InputPage.aspx/GetSkill",
-                        data: "{ 'pre':'" + request.term + "'}",
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        success: function (data) {
-                            response($.map(data.d, function (item) {
-                                return { value: item }
-                            }))
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            alert(textStatus);
-                        }
-                    });
-                }
-            });
-
-        });
-    </script>--%>
 
     <div class="jumbotron">
 
